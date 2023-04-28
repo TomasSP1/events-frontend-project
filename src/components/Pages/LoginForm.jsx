@@ -1,4 +1,4 @@
-import "./LoginForm.css";
+import "../CSS/LoginForm.css";
 import { NavLink, Route, Routes } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 import React, { useState } from "react";
