@@ -8,12 +8,12 @@ import {
   MDBCol,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
+
   MDBInput,
   MDBIcon,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
-import "./RegisterForm.css";
+import "../CSS/RegisterForm.css";
 
 
 
@@ -117,7 +117,7 @@ function RegisterForm() {
                 <div className="d-flex justify-content-center">
                   <p className="text-muted">
                     Already have an account?{" "}
-                    <Link to="/" className="text-decoration-none">
+                    <Link to="/login" className="text-decoration-none">
                       Log in
                     </Link>
                   </p>
@@ -129,10 +129,7 @@ function RegisterForm() {
                 lg="6"
                 className="order-1 order-lg-2 d-flex align-items-center"
               >
-                <MDBCardImage
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                  fluid
-                />
+                
               </MDBCol>
             </MDBRow>
           </form>

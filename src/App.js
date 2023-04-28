@@ -1,19 +1,24 @@
-import LoginForm from "./components/LoginForm";
+import LoginForm from "./components/Pages/LoginForm";
 import 'bootstrap/dist/css/bootstrap.css';
-  
+import FrontPage from "./components/Pages/FrontPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import RegisterForm from "./components/RegisterForm";
-
+import Navigation from "./components/Navbar";
+import RegisterForm from "./components/Pages/RegisterForm";
+import "./components/CSS/App.css"
 function App() {
   return (
-    <Router>
+    <div className="page">
+    <Router classname = "home">
+        <Navigation></Navigation>
       <Routes>
-        <Route path="/" element={<LoginForm/>} />
+        <Route path="/" element={<FrontPage/>} />
+        <Route path="/login" element={<LoginForm/>} />
         <Route path="/register" element={<RegisterForm />} />
       </Routes>
     </Router>
+    </div>
   );
+  
 }
 
 export default App;

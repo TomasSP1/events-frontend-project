@@ -1,0 +1,10 @@
+.cardevents {
+  height: 400px;
+  width: 300px;
+  margin-top: 20px;
+}
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+ gap: 30px;
+}
