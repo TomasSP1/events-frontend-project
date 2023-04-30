@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 
-function Categories() {
+function Categories({ onCategorySelect }) {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,6 +17,10 @@ function Categories() {
 
   const categoryHoverStyle = {
     backgroundColor: "#333",
+  };
+
+  const handleCategoryClick = (category) => {
+    onCategorySelect(category);
   };
 
   const handleCategoryHover = (e) => {
@@ -47,22 +51,23 @@ function Categories() {
 
   return (
     <div>
-    <Container>
-      <div className="d-flex justify-content-center mt-2">
-        <h2>Categories</h2>
-      </div>
-      <div className="categories">
-        {categories.map((category) => (
-          <div
-            key={category.id}
-            style={categoryStyle}
-            onMouseEnter={handleCategoryHover}
-            onMouseLeave={handleCategoryLeave}
-          >
-            {capitalizeFirstLetter(category.title)}
-          </div>
-        ))}
-      </div>
+      <Container>
+        <div className="d-flex justify-content-center mt-2">
+          <h4>Categories</h4>
+        </div>
+        <div className="categories ">
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              style={categoryStyle}
+              onMouseEnter={handleCategoryHover}
+              onMouseLeave={handleCategoryLeave}
+              onClick={() => handleCategoryClick(category.title)}
+            >
+              {capitalizeFirstLetter(category.title)}
+            </div>
+          ))}
+        </div>
       </Container>
     </div>
   );

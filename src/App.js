@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navbar";
 import RegisterForm from "./components/Pages/RegisterForm";
 import "./components/CSS/App.css"
+import UserPage from "./components/Pages/UserPage";
 function App() {
   return (
     <div className="page">
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<FrontPage/>} />
         <Route path="/login" element={<LoginForm/>} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path="/userpage" element={<UserPage/>} />
       </Routes>
     </Router>
     </div>
