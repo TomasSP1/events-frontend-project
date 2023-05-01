@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getCategories } from "../../services/categoriesServices";
 import { Container } from "react-bootstrap";
 
 function Categories({ onCategorySelect }) {
@@ -30,45 +31,44 @@ function Categories({ onCategorySelect }) {
   const handleCategoryLeave = (e) => {
     e.target.style.backgroundColor = "";
   };
-  
+
   useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const response = await fetch("https://events-80pg.onrender.com/api/categories");
-        const data = await response.json();
+    const getCategoriesData = async () => {
+      const data = await getCategories();
+
+      if (data) {
         setCategories(data);
         setLoading(false);
-      } catch (error) {
-        console.error(error);
       }
-    }
-    fetchCategories();
-  }, []);
+    };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    getCategoriesData();
+  }, []);
 
   return (
     <div>
-      <Container>
-        <div className="d-flex justify-content-center mt-2">
-          <h4>Categories</h4>
-        </div>
-        <div className="categories ">
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              style={categoryStyle}
-              onMouseEnter={handleCategoryHover}
-              onMouseLeave={handleCategoryLeave}
-              onClick={() => handleCategoryClick(category.title)}
-            >
-              {capitalizeFirstLetter(category.title)}
-            </div>
-          ))}
-        </div>
-      </Container>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <Container>
+          <div className="d-flex justify-content-center mt-2">
+            <h4>Categories</h4>
+          </div>
+          <div className="categories ">
+            {categories.map((category) => (
+              <div
+                key={category._id}
+                style={categoryStyle}
+                onMouseEnter={handleCategoryHover}
+                onMouseLeave={handleCategoryLeave}
+                onClick={() => handleCategoryClick(category.title)}
+              >
+                {capitalizeFirstLetter(category.title)}
+              </div>
+            ))}
+          </div>
+        </Container>
+      )}
     </div>
   );
 }

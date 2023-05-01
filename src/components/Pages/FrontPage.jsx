@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from "react";
-import Categories from "../Categories";
+import Categories from "../Common/Categories";
 import { Card, Col, Container, Row } from "react-bootstrap";
-
 import "../CSS/FrontPage.css";
+import { getEvents } from "../../services/eventsServices";
 
 function FrontPage() {
   const [events, setEvents] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
-    async function fetchEvents() {
-      try {
-        const response = await fetch(
-          "https://events-80pg.onrender.com/api/events?fbclid=IwAR2BsI942sMsf4p6w41j4UAzLuqulTQiPTqFw--PIH06EEeL5m6vNkmdmlE"
-        );
-        const data = await response.json();
-        console.log(data)
-        setEvents(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchEvents();
+    const getEventsData = async () => {
+      const data = await getEvents();
+
+      setEvents(data);
+    };
+
+    getEventsData();
   }, []);
-  console.log(selectedCategory);
+
   // Filter the events based on the selected category
   const filteredEvents = selectedCategory
     ? events.filter((event) => event.category === selectedCategory)
@@ -47,7 +41,7 @@ function FrontPage() {
               )
               .map((event) => (
                 <Card
-                  key={event.id}
+                  key={event._id}
                   className="cardevents align-items-center m-2"
                 >
                   <Card.Img variant="top" src={event.image} />
