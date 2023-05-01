@@ -1,45 +1,45 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import authServices from "../../auth/authServices";
+import { useAuth } from "../../auth/AuthContext";
 
 import {
- 
   MDBContainer,
   MDBRow,
   MDBCol,
   MDBCard,
   MDBCardBody,
-
   MDBInput,
   MDBIcon,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import "../CSS/RegisterForm.css";
 
-
-
 function RegisterForm() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const { checkAuthStatus } = useAuth();
+  const navigate = useNavigate();
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-    setPasswordsMatch(event.target.value === confirmPassword);
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     if (password !== confirmPassword) {
-      setPassword("");
-      setConfirmPassword("");
       alert("Passwords do not match");
-    } else {
-      alert("Registration successful!");
+      return;
     }
-  };
 
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
-    setPasswordsMatch(event.target.value === password);
+    const user = {
+      username: username,
+      email: email,
+      password,
+    };
+
+    await authServices.register(user);
+    checkAuthStatus();
+    navigate("/");
   };
 
   return (
@@ -60,11 +60,12 @@ function RegisterForm() {
                 <div className="d-flex flex-row align-items-center mb-4 ">
                   <MDBIcon fas icon="user me-3" size="lg" />
                   <MDBInput
-                    label="Your Name"
+                    label="Your Username"
                     id="form1"
                     type="text"
                     className="w-100"
                     required // add this attribute
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
                 <div className="d-flex flex-row align-items-center mb-4">
@@ -72,9 +73,10 @@ function RegisterForm() {
                   <MDBInput
                     label="Your Email"
                     id="form2"
-                    type="email"
+                    // type="email"
                     required // add this attribute to make the field mandatory
-                    validate // add this attribute to enable email validation
+                    // validate // add this attribute to enable email validation
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
 
@@ -85,7 +87,7 @@ function RegisterForm() {
                     id="form3"
                     type="password"
                     value={password}
-                    onChange={handlePasswordChange}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
@@ -97,7 +99,7 @@ function RegisterForm() {
                     id="form4"
                     type="password"
                     value={confirmPassword}
-                    onChange={handleConfirmPasswordChange}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                   />
                 </div>
@@ -128,9 +130,7 @@ function RegisterForm() {
                 md="10"
                 lg="6"
                 className="order-1 order-lg-2 d-flex align-items-center"
-              >
-                
-              </MDBCol>
+              ></MDBCol>
             </MDBRow>
           </form>
         </MDBCardBody>
