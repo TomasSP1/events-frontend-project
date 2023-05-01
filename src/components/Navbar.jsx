@@ -29,6 +29,7 @@ function Navigation() {
               <>
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/register">Sign up</Nav.Link>
+                <Nav.Link href="/regForm">Event Reg Form</Nav.Link>
               </>
             )}
           </Nav>

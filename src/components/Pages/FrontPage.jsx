@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Categories from "../Categories";
+import EventRegForm from "../EventRegForm";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
 import "../CSS/FrontPage.css";

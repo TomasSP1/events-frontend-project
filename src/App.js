@@ -6,6 +6,7 @@ import Navigation from "./components/Navbar";
 import RegisterForm from "./components/Pages/RegisterForm";
 import "./components/CSS/App.css"
 import UserPage from "./components/Pages/UserPage";
+import EventRegForm from "./components/EventRegForm";
 function App() {
   return (
     <div className="page">
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<LoginForm/>} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/userpage" element={<UserPage/>} />
+        <Route path="/regForm" element={<EventRegForm/>} />
       </Routes>
     </Router>
     </div>
