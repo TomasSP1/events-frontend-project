@@ -8,6 +8,8 @@ import "./components/CSS/App.css";
 import ProtectedRoutes from "./auth/ProtectedRoutes";
 import { AuthProvider } from "./auth/AuthContext";
 import EventRegForm from "./components/Pages/EventRegForm";
+import AdminPage from "./components/Pages/AdminPage";
+import UserPage from "./components/Pages/UserPage";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route element={<ProtectedRoutes />}>
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegisterForm />} />
+              <Route path="/adminpage" element={<AdminPage />} />
+              <Route path="/userpage" element={<UserPage />} />
             </Route>
             <Route path="/addEvent" element={<EventRegForm />} />
           </Routes>

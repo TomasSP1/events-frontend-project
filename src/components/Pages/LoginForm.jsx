@@ -10,6 +10,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { checkAuthStatus } = useAuth();
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,9 +27,13 @@ function LoginForm() {
       password: password,
     };
 
-    await authServices.login(user);
-    checkAuthStatus();
-    navigate("/");
+    try {
+      await authServices.login(user);
+      console.log(user);
+      navigate("/adminpage"); // navigate to admin page after successful login
+    } catch (error) {
+      console.log("Error logging in: ", error);
+    }
   };
 
   return (
