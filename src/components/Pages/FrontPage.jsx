@@ -34,7 +34,7 @@ function FrontPage() {
           />
         </Col>
         <Col className="mt-5" md={10}>
-          <EventRegForm getEventsData={getEventsData}/>
+          <h1 className="text-center">Events</h1>
           <div className="card-row d-flex align-items-center justify-content-center flex-wrap my-5">
             {filteredEvents.map((event) => (
               <EventCard
