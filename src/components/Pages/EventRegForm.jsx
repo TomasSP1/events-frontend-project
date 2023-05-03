@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import categoriesService from '../services/CategoriesService';
 import { Container, Col, Row } from "react-bootstrap";
+import axios from 'axios';
 
 // import eventServices from '../services/EventService'
 
@@ -8,32 +9,62 @@ import { Form, Button } from 'react-bootstrap';
 
 
 
-const EventRegForm = ({ getData }) => {
+const EventRegForm = ({ getEventsData }) => {
     const [categories, setCategories] = useState([]);
 
     const [title, setTitle] = useState('');
+    const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [place, setPlace] = useState('');
     const [date, setDate] = useState(new Date());
-    const [photo, setPhoto] = useState('');
+    const [image, setImage] = useState('');
 
     const onSubmit = e => {
         e.preventDefault();
 
-        // const newEvent = {
-        //     title: title,
-        //     description: description,
-        //     photo: photo,
-        //     user: '64457d49c6a3b8ef0849ec14'
-        // }
-        // eventServices.postEvents(newEvent);
+
+        //post events
+        const postEvents = async (event) => {
+            const userStr = localStorage.getItem("user");
+            const userObj = JSON.parse(userStr);
+            const { token } = userObj;
+            try {
+                const response = await axios.post(
+                    "https://events-80pg.onrender.com/api/events",
+                    event,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                return response;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+
+        const newEvent = {
+            title: title,
+            category: category,
+            description: description,
+            place: place,
+            date: date,
+            image: image,
+        }
+        postEvents(newEvent);
+        console.log(newEvent)
 
         setTitle('');
+        setCategory('');
         setDescription('');
         setPlace('');
         setDate(new Date());
-        setPhoto('');
-        // getData();
+        setImage('');
+        console.log(getEventsData())
+        getEventsData();
     }
 
     useEffect(() => {
@@ -53,6 +84,7 @@ const EventRegForm = ({ getData }) => {
         <Container>
             <Row className="justify-content-md-center">
                 <Col lg="6">
+                    <h1 className='text-center'>Event registration form</h1>
                     <Form onSubmit={onSubmit} className='my-3'>
 
                         <Form.Group className="mb-3">
@@ -67,9 +99,10 @@ const EventRegForm = ({ getData }) => {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Category</Form.Label>
-                            <Form.Select aria-label="Default select example">
+                            <Form.Select aria-label="Default select example" value={category} onChange={(e) => setCategory(e.target.value)}>
+                                <option value="">Select a category</option>
                                 {categories.map((category, index) => (
-                                    <option key={index} value={index + 1}>{category.title}</option>
+                                    <option key={index + 1} value={category.id}>{category.title}</option>
                                 ))}
                             </Form.Select>
                         </Form.Group>
@@ -108,10 +141,10 @@ const EventRegForm = ({ getData }) => {
                             <Form.Label>Photo</Form.Label>
                             <Form.Control type="text"
                                 placeholder="Enter a photo"
-                                id='photo'
-                                name='photo'
-                                value={photo}
-                                onChange={(e) => setPhoto(e.target.value)} />
+                                id='image'
+                                name='image'
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)} />
                         </Form.Group>
 
                         <Button variant="dark" type="submit">
