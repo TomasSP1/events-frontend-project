@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Categories from "../Common/Categories";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "../CSS/FrontPage.css";
 import eventServices from "../../services/eventsServices";
 import EventCard from "./EventCard";
-import EventRegForm from "./EventRegForm";
+import Filter from "../Filter/Filter";
+import filterLogic from "../Filter/FilterLogic";
 
 function FrontPage() {
   const [events, setEvents] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   const getEventsData = async () => {
     const data = await eventServices.getEvents();
@@ -19,24 +19,22 @@ function FrontPage() {
     getEventsData();
   }, []);
 
-  // Filter the events based on the selected category
-  const filteredEvents = selectedCategory
-    ? events.filter((event) => event.category === selectedCategory)
-    : events;
+  const handleFilter = (selected) => {
+    filterLogic(selected, events, setFilteredEvents);
+  };
 
   return (
     <Container fluid>
       <Row>
         <Col className="bg-secondary" md={2}>
-          <Categories
-            selectedCategory={selectedCategory}
-            onCategorySelect={setSelectedCategory}
-          />
+          <Filter setFilter={handleFilter} />
         </Col>
         <Col className="mt-5" md={10}>
           <h1 className="text-center">Events</h1>
           <div className="card-row d-flex align-items-center justify-content-center flex-wrap my-5">
-            {filteredEvents.map((event) => (
+            {
+            filteredEvents.length==0  ? <div>No existing events with selected filter.</div> : (
+            filteredEvents.map((event) => (
               <EventCard
                 key={event._id}
                 eventImage={event.image}
@@ -46,7 +44,7 @@ function FrontPage() {
                 eventDescription={event.description}
                 eventPlace={event.place}
               />
-            ))}
+            )))}
           </div>
         </Col>
       </Row>
