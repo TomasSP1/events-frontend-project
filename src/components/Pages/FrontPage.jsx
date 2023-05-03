@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Categories from "../Common/Categories";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import "../CSS/FrontPage.css";
-import { getEvents } from "../../services/eventsServices";
+import eventServices from "../../services/eventsServices";
+import EventCard from "./EventCard";
 
 function FrontPage() {
   const [events, setEvents] = useState([]);
@@ -10,7 +11,7 @@ function FrontPage() {
 
   useEffect(() => {
     const getEventsData = async () => {
-      const data = await getEvents();
+      const data = await eventServices.getEvents();
 
       setEvents(data);
     };
@@ -40,30 +41,15 @@ function FrontPage() {
                   !selectedCategory || event.category === selectedCategory
               )
               .map((event) => (
-                <Card
+                <EventCard
                   key={event._id}
-                  className="cardevents align-items-center m-2"
-                >
-                  <Card.Img variant="top" src={event.image} />
-                  <Card.Body>
-                    <Card.Title>{event.title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      {event.category}
-                    </Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      {event.date}
-                    </Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      {event.description}
-                    </Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      {event.place}
-                    </Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      {event.date}
-                    </Card.Subtitle>
-                  </Card.Body>
-                </Card>
+                  eventImage={event.image}
+                  eventTitle={event.title}
+                  eventCategory={event.category}
+                  eventDate={event.date}
+                  eventDescription={event.description}
+                  eventPlace={event.place}
+                />
               ))}
           </div>
         </Col>

@@ -15,9 +15,13 @@ function Navigation() {
           <Navbar.Brand href="/">Home</Navbar.Brand>
           <Nav className="me-auto">
             {isLoggedIn ? (
-              <Nav.Link>
-                <LogoutBtn></LogoutBtn>
-              </Nav.Link>
+              <>
+                <Nav.Link href="/add_event">Add Event</Nav.Link>
+                <Nav.Link href="/my_events">My Events</Nav.Link>
+                <Nav.Link>
+                  <LogoutBtn></LogoutBtn>
+                </Nav.Link>
+              </>
             ) : (
               <>
                 <Nav.Link href="/login">Login</Nav.Link>
