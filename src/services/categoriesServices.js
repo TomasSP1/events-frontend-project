@@ -1,13 +1,14 @@
+import axios from "axios";
 const API_URL = "/api/categories";
 
 const getCategories = async () => {
-  try {
-    const response = await fetch(API_URL);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
+  const response = await axios.get(API_URL);
+
+  return response.data;
 };
 
-export { getCategories };
+const categoriesServices = {
+  getCategories,
+};
+
+export default categoriesServices;

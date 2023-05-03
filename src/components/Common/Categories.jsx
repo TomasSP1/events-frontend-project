@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getCategories } from "../../services/categoriesServices";
+import categoriesServices from "../../services/categoriesServices";
 import { Container } from "react-bootstrap";
 
 function Categories({ onCategorySelect }) {
@@ -34,7 +34,7 @@ function Categories({ onCategorySelect }) {
 
   useEffect(() => {
     const getCategoriesData = async () => {
-      const data = await getCategories();
+      const data = await categoriesServices.getCategories();
 
       if (data) {
         setCategories(data);
