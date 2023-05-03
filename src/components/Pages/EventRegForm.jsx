@@ -4,14 +4,15 @@ import { Container, Col, Row } from "react-bootstrap";
 import axios from 'axios';
 
 // import eventServices from '../services/EventService'
+import eventServices from '../../services/eventsServices';
 
 import { Form, Button } from 'react-bootstrap';
 
 
 
-const EventRegForm = ({ getEventsData }) => {
+const EventRegForm = () => {
     const [categories, setCategories] = useState([]);
-
+    const [myEvents, setMyEvents] = useState([]);
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
@@ -63,8 +64,14 @@ const EventRegForm = ({ getEventsData }) => {
         setPlace('');
         setDate(new Date());
         setImage('');
-        console.log(getEventsData())
-        getEventsData();
+        const getMyEventsData = async () => {
+            const data = await eventServices.useGetUserEvents();
+      
+            if (data) {
+              setMyEvents(data);
+            }
+          };
+          getMyEventsData();
     }
 
     useEffect(() => {
@@ -82,7 +89,7 @@ const EventRegForm = ({ getEventsData }) => {
 
     return (
         <Container>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center my-5">
                 <Col lg="6">
                     <h1 className='text-center'>Event registration form</h1>
                     <Form onSubmit={onSubmit} className='my-3'>
