@@ -1,9 +1,33 @@
-import React from 'react'
+import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import EventCard from "./EventCard";
 
-function AdminPage() {
+function AdminPage(props) {
+  const notApprovedEvents = props.eventsArr.filter((event) => {
+    console.log(event.approved);
+    return !event.approved;
+  });
+
   return (
-    <div>AdminPage</div>
-  )
+    <div>
+      <h1 style={{textAlign : "center"}}>Not Approved Events</h1>
+      <div className="card-row d-flex align-items-center justify-content-center flex-wrap my-5">
+        {notApprovedEvents.map((event) => {
+          return (
+            <EventCard
+              key={event._id}
+              eventImage={event.image}
+              eventTitle={event.title}
+              eventCategory={event.category}
+              eventDate={event.date}
+              eventDescription={event.description}
+              eventPlace={event.place}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
-export default AdminPage
+export default AdminPage;
