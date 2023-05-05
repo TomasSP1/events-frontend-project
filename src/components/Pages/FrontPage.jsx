@@ -5,10 +5,14 @@ import eventServices from "../../services/eventsServices";
 import EventCard from "./EventCard";
 import Filter from "../Filter/Filter";
 import filterLogic from "../Filter/FilterLogic";
+import { useAuth } from "../../auth/AuthContext";
+import AdminPage from "./AdminPage";
 
 function FrontPage() {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const { userRole } = useAuth();
+  console.log(userRole);
 
   const getEventsData = async () => {
     const data = await eventServices.getEvents();
@@ -31,6 +35,7 @@ function FrontPage() {
           <Filter setFilter={handleFilter} />
         </Col>
         <Col className="mt-5" md={10}>
+          {userRole == "admin" ? <AdminPage eventsArr={events} /> : ""}
           <h1 className="text-center">Events</h1>
           <div className="card-row d-flex align-items-center justify-content-center flex-wrap my-5">
             {filteredEvents.length == 0 ? (

@@ -1,12 +1,12 @@
-import React from 'react'
-import FrontPage from './FrontPage'
+import React from "react";
+import FrontPage from "./FrontPage";
+
 function UserPage() {
   return (
     <div>
-
-        <FrontPage></FrontPage>
+      <h1 style={{ margin: "0 auto", display: "inline-block" }}>User Page</h1>
     </div>
-  )
+  );
 }
 
-export default UserPage
+export default UserPage;
