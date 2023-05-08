@@ -8,7 +8,7 @@ const MyEvents = () => {
 
   useEffect(() => {
     const getMyEventsData = async () => {
-      const data = await eventServices.useGetUserEvents();
+      const data = await eventServices.getUserEvents();
 
       if (data) {
         setMyEvents(data);

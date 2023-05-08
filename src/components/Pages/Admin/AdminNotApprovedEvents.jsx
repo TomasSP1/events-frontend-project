@@ -2,6 +2,7 @@ import React from "react";
 import EventCard from "../EventCard";
 
 const AdminNotApprovedEvents = (props) => {
+  
   const notApprovedEvents = props.events.filter((event) => !event.approved);
   return (
     <div>
@@ -18,6 +19,7 @@ const AdminNotApprovedEvents = (props) => {
               eventDescription={event.description}
               eventPlace={event.place}
               eventID={event._id}
+              approved={false}
             />
           );
         })}

@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "../CSS/FrontPage.css";
-import eventServices from "../../services/eventsServices";
 import EventCard from "./EventCard";
 import Filter from "../Filter/Filter";
 import filterLogic from "../Filter/FilterLogic";
 import { useAuth } from "../../auth/AuthContext";
 import AdminPage from "./Admin/AdminPage";
+import { EventContext } from "./EventContext";
 
 function FrontPage() {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useContext(EventContext);
   const [approvedEvents, setApprovedEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const { userRole } = useAuth();
-
-  const getEventsData = async () => {
-    const data = await eventServices.getEvents();
-    setEvents(data);
-  };
 
   useEffect(() => {
     setApprovedEvents(events.filter((event) => event.approved));
@@ -26,10 +21,6 @@ function FrontPage() {
   useEffect(() => {
     setFilteredEvents(approvedEvents);
   }, [approvedEvents]);
-
-  useEffect(() => {
-    getEventsData();
-  }, []);
 
   const handleFilter = (selected) => {
     filterLogic(selected, events, setFilteredEvents);

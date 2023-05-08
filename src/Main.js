@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoginForm from "./components/Pages/LoginForm";
 import "bootstrap/dist/css/bootstrap.css";
 import FrontPage from "./components/Pages/FrontPage";
@@ -18,7 +18,6 @@ import { useAuth } from "./auth/AuthContext";
 
 const Main = () => {
   const { isLoggedIn } = useAuth();
-
   return (
     <Router className="home">
       <Navigation />

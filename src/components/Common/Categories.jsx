@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import categoriesServices from "../../services/categoriesServices";
+import React, { useState, useEffect, useContext } from "react";
 import { Container } from "react-bootstrap";
+import { CategoriesContext } from "../Pages/CategoriesContext";
 
 function Categories({ onCategorySelect }) {
-  const [categories, setCategories] = useState([]);
+  const [categories] = useContext(CategoriesContext);
   const [loading, setLoading] = useState(true);
-
+  
   const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
@@ -31,19 +31,6 @@ function Categories({ onCategorySelect }) {
   const handleCategoryLeave = (e) => {
     e.target.style.backgroundColor = "";
   };
-
-  useEffect(() => {
-    const getCategoriesData = async () => {
-      const data = await categoriesServices.getCategories();
-
-      if (data) {
-        setCategories(data);
-        setLoading(false);
-      }
-    };
-
-    getCategoriesData();
-  }, []);
 
   return (
     <div>

@@ -1,11 +1,11 @@
 import React from "react";
 import AdminNotApprovedEvents from "./AdminNotApprovedEvents";
-import AdminCreateCategory from "./AdminCreateCategory";
+import AdminEditCategory from "./AdminEditCategory";
 
 function AdminPage(props) {
   return (
     <div>
-      <AdminCreateCategory />
+      <AdminEditCategory />
       <AdminNotApprovedEvents events={props.eventsArr} />
     </div>
   );
