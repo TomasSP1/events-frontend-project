@@ -3,7 +3,7 @@ const API_URL = "/api/categories/";
 
 const userStr = localStorage.getItem("user");
 const userObj = JSON.parse(userStr);
-const { token } = userObj;
+const token = userObj ? userObj.token : null;
 
 const getCategories = async () => {
   try {
