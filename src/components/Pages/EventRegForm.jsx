@@ -64,7 +64,7 @@ const EventRegForm = () => {
         setDate(new Date());
         setImage('');
         const getMyEventsData = async () => {
-            const data = await eventServices.useGetUserEvents();
+            const data = await eventServices.getUserEvents();
       
             if (data) {
               setMyEvents(data);

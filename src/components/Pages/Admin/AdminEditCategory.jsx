@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import categoriesServices from "../../../services/categoriesServices";
+import { CategoriesContext } from "../CategoriesContext";
 
-const AdminCreateCategory = () => {
+const AdminEditCategory = () => {
   const [category, setCategory] = useState("");
-  const [categories, setCategories] = useState([]);
-
-  const getCategories = async () => {
-    const data = await categoriesServices.getCategories();
-    if (data) {
-      setCategories(data);
-    }
-  };
-
-  useEffect(() => {
-    getCategories();
-  }, []);
-
+  const [categories, refreshCategories] = useContext(CategoriesContext);
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,11 +24,11 @@ const AdminCreateCategory = () => {
     if (existingCategory) {
       console.log(`Deleting category "${existingCategory.title}"`);
       await categoriesServices.deleteCategory(existingCategory._id);
-      getCategories();
+      await refreshCategories();
     } else {
       console.log(`Creating category "${formattedCategory}"`);
       await categoriesServices.postCategory({ title: formattedCategory });
-      getCategories();
+      await refreshCategories();
     }
 
     setCategory("");
@@ -71,4 +60,4 @@ const AdminCreateCategory = () => {
   );
 };
 
-export default AdminCreateCategory;
+export default AdminEditCategory;

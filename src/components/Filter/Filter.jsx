@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import CategoriesFilter from "./CategoriesFilter";
 import DateFilter from "./DateFilter";
+import { CategoriesContext } from "../Pages/CategoriesContext";
 
 const Filter = (props) => {
-  const [filterProps,setFilterProps] = useState(['visi','visi']);
+  const [categories] = useContext(CategoriesContext);
+  const [filterProps, setFilterProps] = useState(["visi", "visi"]);
 
   const dateHandler = (day) => {
     setFilterProps([day, filterProps[1]]);
@@ -16,7 +18,7 @@ const Filter = (props) => {
   };
   return (
     <div>
-      <CategoriesFilter selectedCategory={categoryHandler}/>
+      <CategoriesFilter selectedCategory={categoryHandler} key={categories} />
       <DateFilter selectedDate={dateHandler} />
     </div>
   );

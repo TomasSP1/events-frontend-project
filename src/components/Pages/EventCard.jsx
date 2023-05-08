@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card, Modal, Button } from "react-bootstrap";
 import EventModal from "./EventModal";
+import {
+  approveEvent,
+  disapproveEvent,
+  deleteEvent,
+} from "./Admin/AdminControlEvents";
+import { EventContext } from "./EventContext";
 
 const EventCard = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const [events, setEvents, refreshEvents] = useContext(EventContext);
 
   const date = new Date(props.eventDate);
   const year = date.getFullYear();
@@ -15,9 +22,24 @@ const EventCard = (props) => {
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
+  const handleApproveEvent = async () => {
+    await approveEvent(props.eventID);
+    refreshEvents();
+  };
+
+  const handleDeleteEvent = async () => {
+    await deleteEvent(props.eventID);
+    refreshEvents();
+  };
+
+  const handleDissaproveEvent = async () => {
+    await disapproveEvent(props.eventID);
+    refreshEvents();
+  };
+
   return (
     <>
-      <Card className="cardevents align-items-center m-2">
+      <Card className="cardevents align-items-center m-2 h-auto">
         <Card.Img variant="top" src={props.eventImage} />
         <Card.Body>
           <Card.Title>{props.eventTitle}</Card.Title>
@@ -27,7 +49,39 @@ const EventCard = (props) => {
           <Card.Subtitle className="mb-2 text-muted">
             {dateFormatted}
           </Card.Subtitle>
-          <Button onClick={handleShowModal}>Peržiurėti renginį</Button>
+          <div className="d-flex justify-content-center">
+            <Button onClick={handleShowModal} className="mb-2 w-100">
+              Peržiurėti renginį
+            </Button>
+          </div>
+          <div className="d-flex justify-content-center">
+            {props.approved == false ? (
+              <div className="w-100">
+                <Button
+                  variant="success"
+                  className="w-100 mb-2"
+                  onClick={handleApproveEvent}
+                >
+                  Patvirtinti
+                </Button>
+                <Button
+                  variant="danger"
+                  className="w-100  mb-2"
+                  onClick={handleDeleteEvent}
+                >
+                  Ištrinti
+                </Button>
+              </div>
+            ) : (
+              <Button
+                variant="warning"
+                className="w-100"
+                onClick={handleDissaproveEvent}
+              >
+                Nepatvirtinti
+              </Button>
+            )}
+          </div>
         </Card.Body>
       </Card>
 
