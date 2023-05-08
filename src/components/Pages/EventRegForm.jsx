@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 // import categoriesService from '../services/CategoriesService';
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row, Form, Button  } from "react-bootstrap";
 import axios from 'axios';
 
 // import eventServices from '../services/EventService'
 import eventServices from '../../services/eventsServices';
 
-import { Form, Button } from 'react-bootstrap';
 
 
 
