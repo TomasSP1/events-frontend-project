@@ -1,11 +1,11 @@
-import Main from "./EventsMain";
+import Main from "./Main";
 import { AuthProvider } from "./auth/AuthContext";
 
 function App() {
   return (
     <div className="page">
       <AuthProvider>
-        <Main />
+          <Main />
       </AuthProvider>
     </div>
   );

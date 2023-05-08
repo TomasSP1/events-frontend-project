@@ -1,16 +1,11 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import EventCard from "./EventCard";
+import EventCard from "../EventCard";
 
-function AdminPage(props) {
-  const notApprovedEvents = props.eventsArr.filter((event) => {
-    console.log(event.approved);
-    return !event.approved;
-  });
-
+const AdminNotApprovedEvents = (props) => {
+  const notApprovedEvents = props.events.filter((event) => !event.approved);
   return (
     <div>
-      <h1 style={{textAlign : "center"}}>Not Approved Events</h1>
+      <h1 style={{ textAlign: "center" }}>Not Approved Events</h1>
       <div className="card-row d-flex align-items-center justify-content-center flex-wrap my-5">
         {notApprovedEvents.map((event) => {
           return (
@@ -22,12 +17,13 @@ function AdminPage(props) {
               eventDate={event.date}
               eventDescription={event.description}
               eventPlace={event.place}
+              eventID={event._id}
             />
           );
         })}
       </div>
     </div>
   );
-}
+};
 
-export default AdminPage;
+export default AdminNotApprovedEvents;

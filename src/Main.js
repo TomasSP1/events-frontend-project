@@ -15,7 +15,6 @@ import ProtectedRoutes from "./auth/ProtectedRoutes";
 import EventRegForm from "./components/Pages/EventRegForm";
 import MyEvents from "./components/Pages/MyEvents";
 import { useAuth } from "./auth/AuthContext";
-import eventServices from "./services/eventsServices";
 
 const Main = () => {
   const { isLoggedIn } = useAuth();

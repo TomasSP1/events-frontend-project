@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useAuth } from "../auth/AuthContext";
 const API_URL = "/api/events/";
 
 // GET ALL EVENTS.

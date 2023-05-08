@@ -6,19 +6,26 @@ import EventCard from "./EventCard";
 import Filter from "../Filter/Filter";
 import filterLogic from "../Filter/FilterLogic";
 import { useAuth } from "../../auth/AuthContext";
-import AdminPage from "./AdminPage";
+import AdminPage from "./Admin/AdminPage";
 
 function FrontPage() {
   const [events, setEvents] = useState([]);
+  const [approvedEvents, setApprovedEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const { userRole } = useAuth();
-  console.log(userRole);
 
   const getEventsData = async () => {
     const data = await eventServices.getEvents();
     setEvents(data);
-    setFilteredEvents(data);
   };
+
+  useEffect(() => {
+    setApprovedEvents(events.filter((event) => event.approved));
+  }, [events]);
+
+  useEffect(() => {
+    setFilteredEvents(approvedEvents);
+  }, [approvedEvents]);
 
   useEffect(() => {
     getEventsData();
@@ -50,6 +57,7 @@ function FrontPage() {
                   eventDate={event.date}
                   eventDescription={event.description}
                   eventPlace={event.place}
+                  eventID={event._id}
                 />
               ))
             )}
