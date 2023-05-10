@@ -49,6 +49,7 @@ function FrontPage() {
                   eventDescription={event.description}
                   eventPlace={event.place}
                   eventID={event._id}
+                  adminPage={userRole == "admin" ? true : false}
                 />
               ))
             )}

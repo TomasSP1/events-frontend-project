@@ -73,13 +73,16 @@ const EventCard = (props) => {
                 </Button>
               </div>
             ) : (
+              ""
+            )}
+            {props.adminPage ? (
               <Button
                 variant="warning"
-                className="w-100"
+                className="w-100  mb-2"
                 onClick={handleDissaproveEvent}
-              >
-                Nepatvirtinti
-              </Button>
+              >Nepatvirtinti</Button>
+            ) : (
+              ""
             )}
           </div>
         </Card.Body>

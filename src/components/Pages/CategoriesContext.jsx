@@ -14,14 +14,14 @@ const CategoriesProvider = ({ children }) => {
     fetchCategories();
   }, []);
 
-  const refreshCategories = async () => {
-    console.log("Updating")
-    const categoriesData = await categoriesServices.getCategories();
-    setCategories(categoriesData);
-  };
+  // const refreshCategories = async () => {
+  //   console.log("Updating")
+  //   const categoriesData = await categoriesServices.getCategories();
+  //   setCategories(categoriesData);
+  // };
 
   return (
-    <CategoriesContext.Provider value={[categories, setCategories, refreshCategories]}>
+    <CategoriesContext.Provider value={[categories, setCategories]}>
       {children}
     </CategoriesContext.Provider>
   );
