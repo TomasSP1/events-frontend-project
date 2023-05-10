@@ -5,12 +5,15 @@ import { CategoriesContext } from "../CategoriesContext";
 
 const AdminEditCategory = () => {
   const [category, setCategory] = useState("");
-  const [categories, refreshCategories] = useContext(CategoriesContext);
+  const [categories, setCategories] = useContext(CategoriesContext);
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const formattedCategory =
       category.charAt(0).toLowerCase() + category.slice(1);
+
+    console.log(categories);
 
     const existingCategory = categories.find(
       (cat) => cat.title === formattedCategory
@@ -24,11 +27,15 @@ const AdminEditCategory = () => {
     if (existingCategory) {
       console.log(`Deleting category "${existingCategory.title}"`);
       await categoriesServices.deleteCategory(existingCategory._id);
-      await refreshCategories();
+      setCategories((categories) =>
+        categories.filter((category) => category._id !== existingCategory._id)
+      );
     } else {
       console.log(`Creating category "${formattedCategory}"`);
-      await categoriesServices.postCategory({ title: formattedCategory });
-      await refreshCategories();
+      const createdCategory = await categoriesServices.postCategory({
+        title: formattedCategory,
+      });
+      setCategories((categories) => [...categories, createdCategory]);
     }
 
     setCategory("");
