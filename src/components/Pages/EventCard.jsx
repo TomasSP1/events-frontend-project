@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
+import "../CSS/EventCard.css";
 import { Card, Modal, Button } from "react-bootstrap";
 import EventModal from "./EventModal";
+import { IoMdStar } from 'react-icons/io';
 import {
   approveEvent,
   disapproveEvent,
@@ -40,6 +42,17 @@ const EventCard = (props) => {
   return (
     <>
       <Card className="cardevents align-items-center m-2 h-auto">
+      <div className="row d-flex">
+  <div className="col-9">
+    <h5 className="mt-2">This event has been saved:</h5>
+  </div>
+  <div className="col-3 star-icon">
+    <button className="btn btn-link star-icon" type="button">
+      <IoMdStar />
+    </button>
+  </div>
+</div>
+
         <Card.Img variant="top" src={props.eventImage} />
         <Card.Body>
           <Card.Title>{props.eventTitle}</Card.Title>
@@ -80,7 +93,9 @@ const EventCard = (props) => {
                 variant="warning"
                 className="w-100  mb-2"
                 onClick={handleDissaproveEvent}
-              >Nepatvirtinti</Button>
+              >
+                Nepatvirtinti
+              </Button>
             ) : (
               ""
             )}
