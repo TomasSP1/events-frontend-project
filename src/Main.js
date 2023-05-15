@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import LoginForm from "./components/Pages/LoginForm";
 import "bootstrap/dist/css/bootstrap.css";
 import FrontPage from "./components/Pages/FrontPage";
@@ -24,7 +24,7 @@ const Main = () => {
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route element={<ProtectedRoutes />}>
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/login/*" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
         </Route>
         <Route
