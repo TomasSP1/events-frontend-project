@@ -33,10 +33,10 @@ function FrontPage() {
           <Filter setFilter={handleFilter} />
         </Col>
         <Col className="mt-5" md={10}>
-          {userRole == "admin" ? <AdminPage eventsArr={events} /> : ""}
+          {userRole === "admin" ? <AdminPage eventsArr={events} /> : ""}
           <h1 className="text-center">Events</h1>
           <div className="card-row d-flex align-items-center justify-content-center flex-wrap my-5">
-            {filteredEvents.length == 0 ? (
+            {filteredEvents.length === 0 ? (
               <div>No existing events with selected filter.</div>
             ) : (
               filteredEvents.map((event) => (
@@ -49,7 +49,7 @@ function FrontPage() {
                   eventDescription={event.description}
                   eventPlace={event.place}
                   eventID={event._id}
-                  adminPage={userRole == "admin" ? true : false}
+                  adminPage={userRole === "admin" ? true : false}
                 />
               ))
             )}

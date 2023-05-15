@@ -1,17 +1,24 @@
-import React, { useState, useContext } from "react";
-import "../CSS/EventCard.css";
-import { Card, Modal, Button } from "react-bootstrap";
+import React, { useState, useContext, useEffect } from "react";
+import { Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { StarFill, Star } from "react-bootstrap-icons";
+import axios from "axios";
+
 import EventModal from "./EventModal";
-import { IoMdStar } from 'react-icons/io';
 import {
   approveEvent,
   disapproveEvent,
   deleteEvent,
 } from "./Admin/AdminControlEvents";
 import { EventContext } from "./EventContext";
+import favoritesServices from "../../services/favoritesServices";
 
 const EventCard = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [myFavorites, setMyFavorites] = useState([]);
+  const navigate = useNavigate();
+
   const [events, setEvents, refreshEvents] = useContext(EventContext);
 
   const date = new Date(props.eventDate);
@@ -39,20 +46,85 @@ const EventCard = (props) => {
     refreshEvents();
   };
 
+  const handleFavorite = async (id) => {
+    console.log("id", id, isFavorite);
+
+    const userStr = localStorage.getItem("user");
+    const userObj = JSON.parse(userStr);
+
+    if (userObj === null) {
+      navigate("/login");
+    } else {
+      const { token } = userObj;
+
+      try {
+        if (!isFavorite) {
+          // Add the event to the user's favorites
+          const response = await axios.post(
+            "https://events-80pg.onrender.com/api/favorites",
+            { event: id },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setIsFavorite(true);
+          console.log("myFavorites", myFavorites);
+          console.log("Added event to favorites:", response);
+        } else {
+          // Remove the event from the user's favorites
+          const response = await axios.delete(
+            `https://events-80pg.onrender.com/api/favorites/${id}`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setIsFavorite(false);
+
+          console.log("myFavoritesdelete", myFavorites);
+          console.log("Removed event from favorites:", response);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const getFavorites = async () => {
+      const userStr = localStorage.getItem("user");
+      const userObj = JSON.parse(userStr);
+
+      if (userObj !== null) {
+        const favorites = await favoritesServices.getUserFavorites();
+        setMyFavorites(favorites.map((favorite) => favorite.event));
+      }
+    };
+    getFavorites();
+  }, []);
+
+  useEffect(() => {
+    setIsFavorite(myFavorites.includes(props.eventID));
+  }, [myFavorites, props.eventID]);
+
   return (
     <>
       <Card className="cardevents align-items-center m-2 h-auto">
-      <div className="row d-flex">
-  <div className="col-9">
-    <h5 className="mt-2">This event has been saved:</h5>
-  </div>
-  <div className="col-3 star-icon">
-    <button className="btn btn-link star-icon" type="button">
-      <IoMdStar />
-    </button>
-  </div>
-</div>
-
+        <button
+          className="bg-light favContainer"
+          onClick={() => handleFavorite(props.eventID)}
+        >
+          {isFavorite ? (
+            <StarFill className="favoriteIcon" />
+          ) : (
+            <Star className="favoriteIcon" />
+          )}
+        </button>
         <Card.Img variant="top" src={props.eventImage} />
         <Card.Body>
           <Card.Title>{props.eventTitle}</Card.Title>
@@ -68,7 +140,7 @@ const EventCard = (props) => {
             </Button>
           </div>
           <div className="d-flex justify-content-center">
-            {props.approved == false ? (
+            {props.approved === false ? (
               <div className="w-100">
                 <Button
                   variant="success"
