@@ -12,9 +12,10 @@ import Navigation from "./components/Common/Navbar";
 import RegisterForm from "./components/Pages/RegisterForm";
 import "./components/CSS/App.css";
 import ProtectedRoutes from "./auth/ProtectedRoutes";
-import EventRegForm from "./components/Pages/EventRegForm";
+// import EventRegForm from "./components/Pages/EventRegForm";
 import MyEvents from "./components/Pages/MyEvents";
 import { useAuth } from "./auth/AuthContext";
+import EventRegForm from "./components/Pages/EventRegForm";
 
 const Main = () => {
   const { isLoggedIn } = useAuth();
