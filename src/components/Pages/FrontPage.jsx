@@ -13,6 +13,7 @@ function FrontPage() {
   const [approvedEvents, setApprovedEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const { userRole } = useAuth();
+  console.log(useAuth())
 
   useEffect(() => {
     setApprovedEvents(events.filter((event) => event.approved));

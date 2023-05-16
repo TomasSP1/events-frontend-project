@@ -3,17 +3,43 @@ import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { StarFill, Star } from "react-bootstrap-icons";
 import axios from "axios";
-
 import EventModal from "./EventModal";
-import {
-  approveEvent,
-  disapproveEvent,
-  deleteEvent,
-} from "./Admin/AdminControlEvents";
+
+
 import { EventContext } from "./EventContext";
 import favoritesServices from "../../services/favoritesServices";
 
-const EventCard = (props) => {
+const deleteEvent = async (eventId) => {
+  try {
+    const userStr = localStorage.getItem("user");
+    const userObj = JSON.parse(userStr);
+
+    if (userObj === null) {
+      // Handle the case where the user is not logged in
+      console.log("User not logged in");
+      return;
+    }
+
+    const { token } = userObj;
+
+    const response = await axios.delete(
+      `https://events-80pg.onrender.com/api/events/${eventId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Deleted event:", response);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+const UserEventCard = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [myFavorites, setMyFavorites] = useState([]);
@@ -27,24 +53,14 @@ const EventCard = (props) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
-
   const dateFormatted = `${year}-${month}-${day}`;
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-  const handleApproveEvent = async () => {
-    await approveEvent(props.eventID);
-    refreshEvents();
-  };
 
   const handleDeleteEvent = async () => {
     await deleteEvent(props.eventID);
-    refreshEvents();
-  };
-
-  const handleDissaproveEvent = async () => {
-    await disapproveEvent(props.eventID);
     refreshEvents();
   };
 
@@ -142,37 +158,10 @@ const EventCard = (props) => {
             </Button>
           </div>
           <div className="d-flex justify-content-center">
-            {props.approved === false ? (
-              <div className="w-100">
-                <Button
-                  variant="success"
-                  className="w-100 mb-2"
-                  onClick={handleApproveEvent}
-                >
-                  Patvirtinti
-                </Button>
-                <Button
-                  variant="danger"
-                  className="w-100  mb-2"
-                  onClick={handleDeleteEvent}
-                >
-                  Ištrinti
-                </Button>
-              </div>
-            ) : (
-              ""
-            )}
-            {props.adminPage ? (
-              <Button
-                variant="warning"
-                className="w-100  mb-2"
-                onClick={handleDissaproveEvent}
-              >
-                Nepatvirtinti
-              </Button>
-            ) : (
-              ""
-            )}
+            <Button>Update</Button>
+          </div>
+          <div className="d-flex justify-content-center my-2">
+          <Button variant="danger" onClick={handleDeleteEvent}>Ištrinti</Button>
           </div>
         </Card.Body>
       </Card>
@@ -191,4 +180,4 @@ const EventCard = (props) => {
   );
 };
 
-export default EventCard;
+export default UserEventCard;
