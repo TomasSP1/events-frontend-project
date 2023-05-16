@@ -6,6 +6,7 @@ import axios from "axios";
 import EventModal from "./EventModal";
 
 
+
 import { EventContext } from "./EventContext";
 import favoritesServices from "../../services/favoritesServices";
 
@@ -46,6 +47,7 @@ const UserEventCard = (props) => {
   const navigate = useNavigate();
 
   console.log(props)
+
 
   const [events, setEvents, refreshEvents] = useContext(EventContext);
 
@@ -158,10 +160,18 @@ const UserEventCard = (props) => {
             </Button>
           </div>
           <div className="d-flex justify-content-center">
-            <Button>Update</Button>
+            <Button
+              onClick={() =>
+                navigate(`/add_event?eventId=${props.eventID}`, {
+                  state: { eventData: props },
+                })
+              }
+            >
+              Update
+            </Button>
           </div>
           <div className="d-flex justify-content-center my-2">
-          <Button variant="danger" onClick={handleDeleteEvent}>Ištrinti</Button>
+            <Button variant="danger" onClick={handleDeleteEvent}>Ištrinti</Button>
           </div>
         </Card.Body>
       </Card>
