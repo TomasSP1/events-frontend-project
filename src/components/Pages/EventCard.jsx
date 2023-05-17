@@ -132,6 +132,7 @@ const EventCard = (props) => {
     setIsFavorite(myFavorites.includes(props.eventID));
   }, [myFavorites, props.eventID]);
 
+
   useEffect(() => {
     const fetchEventData = async () => {
       try {
