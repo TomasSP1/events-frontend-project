@@ -24,7 +24,7 @@ function FrontPage() {
   }, [approvedEvents]);
 
   const handleFilter = (selected) => {
-    filterLogic(selected, events, setFilteredEvents);
+    filterLogic(selected, approvedEvents, setFilteredEvents);
   };
 
   return (
