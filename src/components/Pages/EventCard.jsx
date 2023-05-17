@@ -3,7 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { StarFill, Star } from "react-bootstrap-icons";
 import axios from "axios";
-
+import "../CSS/EventCard.css";
 import EventModal from "./EventModal";
 import {
   approveEvent,
@@ -19,7 +19,8 @@ const EventCard = (props) => {
   const [myFavorites, setMyFavorites] = useState([]);
   const navigate = useNavigate();
 
-  console.log(props)
+  const [eventData, setEventData] = useState(null);
+
 
   const [events, setEvents, refreshEvents] = useContext(EventContext);
 
@@ -103,10 +104,27 @@ const EventCard = (props) => {
       const userObj = JSON.parse(userStr);
 
       if (userObj !== null) {
-        const favorites = await favoritesServices.getUserFavorites();
-        setMyFavorites(favorites.map((favorite) => favorite.event));
+        const { token } = userObj;
+        try {
+          const response = await axios.get(
+            "https://events-80pg.onrender.com/api/favorites/",
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          const favoritesData = response.data;
+
+          const favorites = favoritesData.map((favorite) => favorite.event);
+          setMyFavorites(favorites);
+        } catch (error) {
+          console.error(error);
+        }
       }
     };
+
     getFavorites();
   }, []);
 
@@ -114,20 +132,44 @@ const EventCard = (props) => {
     setIsFavorite(myFavorites.includes(props.eventID));
   }, [myFavorites, props.eventID]);
 
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        const response = await axios.get(
+          `https://events-80pg.onrender.com/api/favorites/${props.eventID}`
+        );
+        const eventData = response.data;
+        setEventData(eventData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchEventData();
+  }, [props.eventID, isFavorite]);
+
   return (
     <>
-      <Card className="cardevents align-items-center m-2 h-auto">
-        <button
-          className="bg-light favContainer"
-          onClick={() => handleFavorite(props.eventID)}
-        >
-          {isFavorite ? (
-            <StarFill className="favoriteIcon" />
-          ) : (
-            <Star className="favoriteIcon" />
-          )}
-        </button>
-        <Card.Img variant="top" src={props.eventImage} />
+     
+      <Card className="cardevents m-2 h-auto">
+      
+      <div className="image-container">
+    <button
+      className="bg-light favContainer"
+      onClick={() => handleFavorite(props.eventID)}
+    >
+      {isFavorite ? (
+        <StarFill className="favoriteIcon" />
+      ) : (
+        <Star className="favoriteIcon" />
+      )}
+    </button>
+
+    <h3 className="image-overlay">{eventData}</h3>
+    <Card.Img variant="top" src={props.eventImage} className="img-fluid" />
+
+  </div>
+
         <Card.Body>
           <Card.Title>{props.eventTitle}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">

@@ -28,6 +28,7 @@ function LoginForm() {
 
     await authServices.login(user);
     checkAuthStatus();
+    console.log(user);
     navigate("/");
   };
 
