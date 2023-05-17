@@ -1,77 +1,121 @@
 import React, { useState, useEffect } from 'react';
-// import categoriesService from '../services/CategoriesService';
-import { Container, Col, Row, Form, Button  } from "react-bootstrap";
+import { useLocation } from 'react-router-dom';
+import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-
-// import eventServices from '../services/EventService'
-import eventServices from '../../services/eventsServices';
-
-
-
+import { useNavigate } from 'react-router-dom';
 
 const EventRegForm = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const eventId = queryParams.get('eventId');
+
     const [categories, setCategories] = useState([]);
-    const [myEvents, setMyEvents] = useState([]);
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [place, setPlace] = useState('');
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState('');
     const [image, setImage] = useState('');
 
-    const onSubmit = e => {
+    const navigate = useNavigate();
+
+    const onSubmit = async (e) => {
         e.preventDefault();
+      
+        console.log('Submitting form:', title, category, description, place, date, image);
+      
+        const newEvent = {
+          title,
+          category_id: category,
+          description,
+          location: place,
+          date: new Date(date).toISOString(), // Convert the date to ISO 8601 format
+          image_url: image,
+        };
+      
+        console.log('New event:', newEvent);
+      
+        try {
+          const userStr = localStorage.getItem("user");
+          const userObj = JSON.parse(userStr);
+      
+          if (userObj === null) {
+            // Handle the case where the user is not logged in
+            console.log("User not logged in");
+            return;
+          }
+      
+          const { token } = userObj;
+      
+          let response;
+          if (eventId) {
+            // Update an existing event
+            response = await axios.put(
+              `https://events-80pg.onrender.com/api/events/${eventId}`,
+              newEvent,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+          } else {
+            // Create a new event
+            response = await axios.post(
+              "https://events-80pg.onrender.com/api/events",
+              newEvent,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+          }
+      
+          console.log('Response:', response.data);
+      
+          navigate('/my_events');
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
-
-        //post events
-        const postEvents = async (event) => {
-            const userStr = localStorage.getItem("user");
-            const userObj = JSON.parse(userStr);
-            const { token } = userObj;
+    useEffect(() => {
+        async function fetchEventDetails() {
             try {
-                const response = await axios.post(
-                    "https://events-80pg.onrender.com/api/events",
-                    event,
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-                return response;
+                const eventProps = location.state?.eventData;
+                if (eventProps) {
+                    const { eventID, eventTitle, eventCategory, eventDescription, eventPlace, eventDate, eventImage } = eventProps;
+                    setTitle(eventTitle);
+                    setCategory(eventCategory);
+                    setDescription(eventDescription);
+                    setPlace(eventPlace);
+                    setDate(eventDate);
+                    setImage(eventImage);
+                } else if (eventId) {
+                    const response = await axios.get(
+                        `https://events-80pg.onrender.com/api/events/${eventId}`
+                    );
+                    const eventData = response.data;
+                    setTitle(eventData.title);
+                    setCategory(eventData.category);
+                    setDescription(eventData.description);
+                    setPlace(eventData.place);
+                    setDate(eventData.date);
+                    setImage(eventData.image);
+                }
             } catch (error) {
                 console.error(error);
             }
         }
 
-
-        const newEvent = {
-            title: title,
-            category: category,
-            description: description,
-            place: place,
-            date: date,
-            image: image,
+        if (eventId || location.state?.eventData) {
+            fetchEventDetails();
         }
-        postEvents(newEvent);
-        console.log(newEvent)
+    }, [eventId, location.state?.eventData]);
 
-        setTitle('');
-        setCategory('');
-        setDescription('');
-        setPlace('');
-        setDate(new Date());
-        setImage('');
-        const getMyEventsData = async () => {
-            const data = await eventServices.getUserEvents();
-      
-            if (data) {
-              setMyEvents(data);
-            }
-          };
-          getMyEventsData();
-    }
+
+
 
     useEffect(() => {
         async function fetchCategories() {
@@ -86,6 +130,7 @@ const EventRegForm = () => {
         fetchCategories();
     }, []);
 
+
     return (
         <Container>
             <Row className="justify-content-md-center my-5">
@@ -95,7 +140,8 @@ const EventRegForm = () => {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text"
+                            <Form.Control
+                                type="text"
                                 placeholder="Enter title"
                                 id='text'
                                 name='text'

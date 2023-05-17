@@ -17,11 +17,12 @@ const EventProvider = ({ children }) => {
   const refreshEvents = async () => {
     const eventsData = await eventServices.getEvents();
     setEvents(eventsData);
-
   };
 
+  const contextValue = [events, setEvents, refreshEvents]; // Include refreshEvents in the context value
+
   return (
-    <EventContext.Provider value={[events, setEvents, refreshEvents]}>
+    <EventContext.Provider value={contextValue}>
       {children}
     </EventContext.Provider>
   );
