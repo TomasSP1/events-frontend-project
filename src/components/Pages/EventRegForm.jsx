@@ -26,11 +26,11 @@ const EventRegForm = () => {
       
         const newEvent = {
           title,
-          category_id: category,
+          category,
           description,
-          location: place,
+          place,
           date: new Date(date).toISOString(), // Convert the date to ISO 8601 format
-          image_url: image,
+          image
         };
       
         console.log('New event:', newEvent);
@@ -60,6 +60,7 @@ const EventRegForm = () => {
               }
             );
           } else {
+            console.log(newEvent)
             // Create a new event
             response = await axios.post(
               "https://events-80pg.onrender.com/api/events",

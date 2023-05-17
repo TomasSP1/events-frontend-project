@@ -114,6 +114,7 @@ const EventCard = (props) => {
     setIsFavorite(myFavorites.includes(props.eventID));
   }, [myFavorites, props.eventID]);
 
+  
   return (
     <>
       <Card className="cardevents align-items-center m-2 h-auto">
