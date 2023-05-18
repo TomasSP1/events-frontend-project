@@ -7,3 +7,22 @@
 h5{
     font-size: 16px;
 }
+
+
+.image-container {
+  position: relative;
+}
+
+.image-overlay {
+  font-family: "Arial", sans-serif;
+  position: absolute;
+  top: 25%;
+  right: 2%;
+  height: 30px;
+  width: 30px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

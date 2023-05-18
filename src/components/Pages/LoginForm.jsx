@@ -29,6 +29,7 @@ function RLModal() {
 
     await authServices.login(user);
     checkAuthStatus();
+    console.log(user);
     navigate("/");
   };
   return (
