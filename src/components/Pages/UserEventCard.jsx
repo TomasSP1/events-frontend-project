@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { StarFill, Star } from "react-bootstrap-icons";
 import axios from "axios";
 import EventModal from "./EventModal";
-
-
-
 import { EventContext } from "./EventContext";
 import favoritesServices from "../../services/favoritesServices";
 
@@ -39,17 +36,15 @@ const deleteEvent = async (eventId) => {
   }
 };
 
-
 const UserEventCard = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [myFavorites, setMyFavorites] = useState([]);
   const navigate = useNavigate();
 
-  console.log(props)
+  console.log(props);
 
-
-  const [events, setEvents, refreshEvents] = useContext(EventContext);
+  const [, , , , , refreshMyEvents] = useContext(EventContext);
 
   const date = new Date(props.eventDate);
   const year = date.getFullYear();
@@ -60,10 +55,9 @@ const UserEventCard = (props) => {
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-
   const handleDeleteEvent = async () => {
     await deleteEvent(props.eventID);
-    refreshEvents();
+    refreshMyEvents();
   };
 
   const handleFavorite = async (id) => {
@@ -145,7 +139,10 @@ const UserEventCard = (props) => {
             <Star className="favoriteIcon" />
           )}
         </button>
-        <Card.Img variant="top" src={props.eventImage} />
+        <Card.Img
+          variant="top"
+          src={props.eventImage}
+        />
         <Card.Body>
           <Card.Title>{props.eventTitle}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
@@ -155,7 +152,10 @@ const UserEventCard = (props) => {
             {dateFormatted}
           </Card.Subtitle>
           <div className="d-flex justify-content-center">
-            <Button onClick={handleShowModal} className="mb-2 w-100">
+            <Button
+              onClick={handleShowModal}
+              className="mb-2 w-100"
+            >
               Peržiurėti renginį
             </Button>
           </div>
@@ -171,7 +171,12 @@ const UserEventCard = (props) => {
             </Button>
           </div>
           <div className="d-flex justify-content-center my-2">
-            <Button variant="danger" onClick={handleDeleteEvent}>Ištrinti</Button>
+            <Button
+              variant="danger"
+              onClick={handleDeleteEvent}
+            >
+              Ištrinti
+            </Button>
           </div>
         </Card.Body>
       </Card>

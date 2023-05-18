@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { EventContext } from "./EventContext";
 
 const EventRegForm = () => {
-
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const eventId = queryParams.get("eventId");
+  const [,,,,,refreshMyEvents] = useContext(EventContext);
 
   const [categories, setCategories] = useState([]);
   const [title, setTitle] = useState("");
@@ -18,65 +19,72 @@ const EventRegForm = () => {
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-      
-        console.log('Submitting form:', title, category, description, place, date, image);
-      
-        const newEvent = {
-          title,
-          category,
-          description,
-          place,
-          date: new Date(date).toISOString(), // Convert the date to ISO 8601 format
-          image
-        };
-      
-        console.log('New event:', newEvent);
-      
-        try {
-          const userStr = localStorage.getItem("user");
-          const userObj = JSON.parse(userStr);
-      
-          if (userObj === null) {
-            // Handle the case where the user is not logged in
-            console.log("User not logged in");
-            return;
-          }
-      
-          const { token } = userObj;
-      
-          let response;
-          if (eventId) {
-            // Update an existing event
-            response = await axios.put(
-              `https://events-80pg.onrender.com/api/events/${eventId}`,
-              newEvent,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
-          } else {
-            console.log(newEvent)
-            // Create a new event
-            response = await axios.post(
-              "https://events-80pg.onrender.com/api/events",
-              newEvent,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
+  const onSubmit = async (e) => {
+    e.preventDefault();
 
+    console.log(
+      "Submitting form:",
+      title,
+      category,
+      description,
+      place,
+      date,
+      image
+    );
+
+    const newEvent = {
+      title,
+      category,
+      description,
+      place,
+      date: new Date(date).toISOString(), // Convert the date to ISO 8601 format
+      image,
+    };
+
+    console.log("New event:", newEvent);
+
+    try {
+      const userStr = localStorage.getItem("user");
+      const userObj = JSON.parse(userStr);
+
+      if (userObj === null) {
+        // Handle the case where the user is not logged in
+        console.log("User not logged in");
+        return;
+      }
+
+      const { token } = userObj;
+
+      let response;
+      if (eventId) {
+        // Update an existing event
+        response = await axios.put(
+          `https://events-80pg.onrender.com/api/events/${eventId}`,
+          newEvent,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
+        );
+      } else {
+        console.log(newEvent);
+        // Create a new event
+        response = await axios.post(
+          "https://events-80pg.onrender.com/api/events",
+          newEvent,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      }
 
       console.log("Response:", response.data);
-
+      refreshMyEvents();
       navigate("/my_events");
     } catch (error) {
       console.error(error);

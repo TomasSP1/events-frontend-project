@@ -12,11 +12,11 @@ import Navigation from "./components/Common/Navbar";
 import RegisterForm from "./components/Pages/RegisterForm";
 import "./components/CSS/App.css";
 import ProtectedRoutes from "./auth/ProtectedRoutes";
-// import EventRegForm from "./components/Pages/EventRegForm";
 import MyEvents from "./components/Pages/MyEvents";
 import { useAuth } from "./auth/AuthContext";
 import EventRegForm from "./components/Pages/EventRegForm";
 import Footer from "./components/Common/Footer";
+import Favorites from "./components/Pages/Favorites";
 
 const Main = () => {
   const { isLoggedIn } = useAuth();
@@ -45,6 +45,10 @@ const Main = () => {
         <Route
           path="/my_events"
           element={isLoggedIn ? <MyEvents /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/favorites"
+          element={isLoggedIn ? <Favorites /> : <Navigate to={"/"} />}
         />
       </Routes>
       <Footer />

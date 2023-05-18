@@ -91,6 +91,7 @@ function Footer() {
               <i className="fa-brands fa-linkedin"></i>Airidas Š.
             </a>
             <p>Back-end</p>
+            <p>Front-end</p>
           </div>
 
           <div>
