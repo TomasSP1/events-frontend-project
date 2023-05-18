@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+
 import categoriesServices from "../../../services/categoriesServices";
+
 import { CategoriesContext } from "../CategoriesContext";
 
 const AdminEditCategory = () => {
@@ -12,8 +14,6 @@ const AdminEditCategory = () => {
 
     const formattedCategory =
       category.charAt(0).toLowerCase() + category.slice(1);
-
-    console.log(categories);
 
     const existingCategory = categories.find(
       (cat) => cat.title === formattedCategory
@@ -44,7 +44,10 @@ const AdminEditCategory = () => {
   return (
     <Container>
       <Row className="justify-content-md-center my-5">
-        <Col lg="6" className="text-center">
+        <Col
+          lg="6"
+          className="text-center"
+        >
           <h1>Sukurti/Ištrinti Kategorija</h1>
           <Form onSubmit={onSubmit}>
             <Form.Group className="mb-3">
@@ -57,7 +60,10 @@ const AdminEditCategory = () => {
                 style={{ textTransform: "capitalize" }}
               />
             </Form.Group>
-            <Button variant="secondary" type="submit">
+            <Button
+              variant="secondary"
+              type="submit"
+            >
               Pridėti arba ištrinti
             </Button>
           </Form>

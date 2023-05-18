@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Container } from "react-bootstrap";
+
 import { CategoriesContext } from "../Pages/CategoriesContext";
 
 function Categories({ onCategorySelect }) {
   const [categories] = useContext(CategoriesContext);
-  const [loading, setLoading] = useState(true);
-  
+  const isLoading = true;
+
   const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
@@ -34,7 +35,7 @@ function Categories({ onCategorySelect }) {
 
   return (
     <div>
-      {loading ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
         <Container>

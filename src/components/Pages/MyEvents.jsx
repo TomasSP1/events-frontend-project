@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+
 import UserEventCard from "./UserEventCard";
 import { EventContext } from "./EventContext";
 
 const MyEvents = () => {
   const [, , , myEvents] = useContext(EventContext);
-  
 
   return (
     <Container fluid>

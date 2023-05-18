@@ -1,5 +1,7 @@
 import React from "react";
+
 import "../CSS/Footer.css";
+import { creatorsData } from "../../utils/creatorsData.js";
 
 function Footer() {
   return (
@@ -47,62 +49,19 @@ function Footer() {
         <div className="footer_team">
           <p>Project by:</p>
 
-          <div>
-            <a
-              target="blank"
-              href="https://www.linkedin.com/in/tomas-rinkevicius/"
-            >
-              <i className="fa-brands fa-linkedin"></i>
-              Tomas R.
-            </a>
-            <p>Front-end</p>
-            <p>UI/UX</p>
-            <p>Design</p>
-          </div>
-
-          <div>
-            <a
-              target="blank"
-              href="https://www.linkedin.com/in/donatas-kusleika-26684b131/"
-            >
-              <i className="fa-brands fa-linkedin"></i>Donatas K.
-            </a>
-            <p>Front-end</p>
-            <p>UI/UX</p>
-          </div>
-
-          <div>
-            <a
-              href="https://www.linkedin.com/in/tomas-%C5%A1pigelskis-6ab99524b/"
-              target="blank"
-            >
-              <i className="fa-brands fa-linkedin"></i>
-              Tomas Šp.
-            </a>
-            <p>Team Lead</p>
-            <p>Back-end</p>
-          </div>
-
-          <div>
-            <a
-              target="blank"
-              href="https://www.linkedin.com/in/airidas-%C5%A1mitas-a83001224/"
-            >
-              <i className="fa-brands fa-linkedin"></i>Airidas Š.
-            </a>
-            <p>Back-end</p>
-            <p>Front-end</p>
-          </div>
-
-          <div>
-            <a
-              target="blank"
-              href="https://www.linkedin.com/in/evelina-marcinkeviciene/"
-            >
-              <i className="fa-brands fa-linkedin"></i>Evelina M.
-            </a>
-            <p>Back-end</p>
-          </div>
+          {creatorsData.map(({ name, socialLink, stack }) => (
+            <div key={name}>
+              <a
+                target="blank"
+                href={socialLink}
+              >
+                <i className="fa-brands fa-linkedin"></i>
+                {name}
+              </a>
+              {stack &&
+                stack.map((item, index) => <p key={item + index}>{item}</p>)}
+            </div>
+          ))}
         </div>
       </div>
 

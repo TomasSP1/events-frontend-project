@@ -11,12 +11,8 @@ const LogoutBtn = () => {
   };
 
   return (
-    <div
-      title="Logout"
-      onClick={handleLogout}
-    >
+    <div onClick={handleLogout}>
       <i
-        title="Logout"
         onClick={handleLogout}
         className="fa-solid fa-right-from-bracket"
       ></i>

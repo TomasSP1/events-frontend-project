@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
+
 import CategoriesFilter from "./CategoriesFilter";
 import DateFilter from "./DateFilter";
+
 import { CategoriesContext } from "../Pages/CategoriesContext";
 
 const Filter = (props) => {
@@ -16,6 +18,7 @@ const Filter = (props) => {
     setFilterProps([filterProps[0], category]);
     props.setFilter([filterProps[0], category]);
   };
+
   return (
     <div
       style={{
