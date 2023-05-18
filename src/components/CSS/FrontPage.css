@@ -1,3 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#frontPageContainer {
+  /* border: 2px solid red; */
+  border: none;
+}
+
+#loadingDiv {
+  border: 3px solid black;
+  width: 150px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1000px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+}
+#filtersDiv {
+  /* border: 2px solid lime; */
+  height: 15vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 80px !important;
+}
+
+#filtersDiv > h1 {
+  font-family: "Titan One", cursive;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  margin-left: 7px !important;
+  /* border: 2px solid blue; */
+  width: 100%;
+  text-align: start !important;
+}
+
+#eventsDiv {
+  /* border: 5px solid blue; */
+  min-height: 85vh;
+}
+
 .cardevents {
   height: 400px;
   width: 300px;
@@ -8,23 +55,4 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-}
-
-.favContainer {
-  height: 30px;
-  width: 30px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  border: none;
-}
-
-.favoriteIcon {
-  height: 22px;
-  width: 22px;
-  fill: orange;
 }

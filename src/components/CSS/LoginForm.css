@@ -28,11 +28,18 @@
 .RLform {
   /* border: 2px solid orange !important; */
   max-height: 80%;
+  padding: 50px !important;
+}
+.RLform input,
+button {
+  font-family: "Inter", sans-serif;
+  font-weight: 500 !important;
+  height: 40px !important;
 }
 
 #BrandLogoLogin {
   width: 100%;
-  height: 20%;
+  height: 20% !important;
   /* border: 2px solid red; */
   object-fit: contain;
   padding: 1% !important;
@@ -48,10 +55,11 @@
   justify-content: center;
   align-items: center;
 }
-h3 {
+#main_containerLogin h3 {
   color: #03dac6 !important;
   font-family: "Titan One", cursive;
   text-align: center;
+  margin: 10px 0 !important;
 }
 
 .Auth-form {
@@ -64,11 +72,6 @@ h3 {
   padding-left: 12%;
   padding-right: 12%;
 }
-input {
-  font-family: "Inter", sans-serif;
-  font-weight: 500 !important;
-}
-
 /* login btn */
 #loginBtn {
   background-color: #03dac6;

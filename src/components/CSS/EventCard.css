@@ -1,20 +1,101 @@
-.star-icon {
-    margin-top: -15px !important;
-    color: gold !important;
-    font-size: 36px !important;
-  }
-  
-h5{
-    font-size: 16px;
+h5 {
+  font-size: 16px;
 }
 
+#singleEventCard {
+  /* border: 3px solid red; */
+  height: 350px !important;
+  width: 300px !important;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(255, 255, 255, 0.4);
+}
 
+/* image container */
 .image-container {
   position: relative;
+  height: 60%;
+  /* border: 3px solid lime; */
+  overflow: hidden;
 }
 
-.image-overlay {
-  font-family: "Arial", sans-serif;
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.image-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.image-container:hover img {
+  transform: scale(1.1);
+}
+
+.image-container:hover::before {
+  opacity: 1;
+}
+
+/* heart button */
+#favContainer {
+  position: absolute;
+  top: 54%;
+  right: 5%;
+  z-index: 100;
+  width: 40px !important;
+  height: 40px !important;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.favContainer:hover {
+  background-color: #ebebeb;
+  transform: scale(1.1);
+}
+
+.favContainer:focus {
+  outline: none;
+}
+
+.favContainer:active {
+  transform: scale(0.9);
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#favHeart {
+  animation: pulsate 1s infinite;
+}
+
+/* --------------------- */
+
+.favNumber {
   position: absolute;
   top: 25%;
   right: 2%;
@@ -26,3 +107,27 @@ h5{
   justify-content: center;
   align-items: center;
 }
+
+#eventCardBody {
+  /* border: 3px solid blue; */
+  font-family: "inter", sans-serif;
+  height: 40%;
+  padding: 5px 20px 0 20px !important;
+}
+#eventCardBody > h5 {
+  font-weight: 800;
+
+  /* border: 3px solid red; */
+}
+
+/* @media (min-width: 768px) {
+  #singleEventCard {
+    width: 20% !important;
+  }
+}
+
+@media (min-width: 800px) {
+  #singleEventCard {
+    width: 30% !important;
+  }
+} */

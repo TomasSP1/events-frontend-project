@@ -25,6 +25,7 @@
   /* border: 3px solid red; */
   justify-self: center;
   width: 33%;
+  height: 100% !important;
 }
 #BrandLogo > img:hover {
   cursor: pointer;
@@ -180,8 +181,8 @@
   #BurgerMenu {
     color: white;
     background-color: #03dac6;
-    width: 30px;
-    height: 30px;
+    width: 30px !important;
+    height: 30px !important;
     border-radius: 10px;
     border: none;
     font-size: 1.3rem;

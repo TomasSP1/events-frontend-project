@@ -58,7 +58,10 @@ function RegisterForm() {
           id="BrandLogoReg"
           to="/"
         >
-          <img src="https://drive.google.com/uc?export=view&id=14QOjF7QZE5gxW9upTRpR6bju_jIpqgPQ" />
+          <img
+            src="https://drive.google.com/uc?export=view&id=14QOjF7QZE5gxW9upTRpR6bju_jIpqgPQ"
+            alt="logo"
+          />
         </Link>
 
         <div id="regForma">
