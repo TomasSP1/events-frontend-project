@@ -16,6 +16,7 @@ import ProtectedRoutes from "./auth/ProtectedRoutes";
 import MyEvents from "./components/Pages/MyEvents";
 import { useAuth } from "./auth/AuthContext";
 import EventRegForm from "./components/Pages/EventRegForm";
+import Footer from "./components/Common/Footer";
 
 const Main = () => {
   const { isLoggedIn } = useAuth();
@@ -23,10 +24,19 @@ const Main = () => {
     <Router className="home">
       <Navigation />
       <Routes>
-        <Route path="/" element={<FrontPage />} />
+        <Route
+          path="/"
+          element={<FrontPage />}
+        />
         <Route element={<ProtectedRoutes />}>
-          <Route path="/login/*" element={<LoginForm />} />
-          <Route path="/register" element={<RegisterForm />} />
+          <Route
+            path="/login/*"
+            element={<LoginForm />}
+          />
+          <Route
+            path="/register"
+            element={<RegisterForm />}
+          />
         </Route>
         <Route
           path="/add_event"
@@ -37,6 +47,7 @@ const Main = () => {
           element={isLoggedIn ? <MyEvents /> : <Navigate to={"/"} />}
         />
       </Routes>
+      <Footer />
     </Router>
   );
 };
