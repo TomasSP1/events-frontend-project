@@ -1,0 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+
+#Navbar {
+  background-color: #121212;
+  position: fixed;
+  top: 0;
+  color: #fff;
+  width: 100vw;
+  height: 15vh;
+  z-index: 999;
+  border-top: 10px solid #03dac6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo stuff */
+#BrandLogo {
+  height: 100%;
+  object-fit: contain;
+  /* border: 3px solid red; */
+  justify-self: center;
+  width: 33%;
+}
+#BrandLogo > img:hover {
+  cursor: pointer;
+}
+
+#BrandLogo > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* border: 3px solid blue; */
+}
+#BrandLogo2 {
+  display: none;
+}
+
+/* Navbar links div */
+.Nav_Link {
+  /* border: 3px solid orange; */
+  padding: 10px !important;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  width: 33%;
+}
+.links {
+  height: 20%;
+  width: 100%;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+.links > a {
+  color: white !important;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+
+  /* border: 2px solid red; */
+}
+
+/* Green buttons  */
+#Btns_Panel {
+  /* border: 3px solid purple !important; */
+  height: 100% !important;
+  padding: 0 10px 5px 10px !important;
+  justify-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  width: 33%;
+}
+
+.greenBtn {
+  width: 50px;
+  height: 70px !important;
+  background-color: #03dac6;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  align-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 5px !important;
+}
+.welcomeText,
+.welcomeTextNoAuth {
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  height: 20%;
+  font-weight: 400;
+  font-size: 100%;
+  text-align: end;
+  color: white;
+  /* border: 1px solid lime; */
+}
+
+.greenBtn {
+  text-decoration: none;
+}
+.greenBtn > i {
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+}
+.greenBtn:hover {
+  background-color: white;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.greenBtn:hover i {
+  color: black;
+}
+
+#SlideMenu {
+  /* border: 2px solid red; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.btnsDiv {
+  /* border: 2px solid blue; */
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Styles for Navbar on mobile devices */
+@media (max-width: 767px) {
+  .Nav_Link {
+    width: 50%;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 0;
+    left: 25%;
+    z-index: 998;
+  }
+
+  .btnsDiv {
+    justify-content: flex-start;
+  }
+  .welcomeText {
+    text-align: start;
+    font-size: 80%;
+    padding-bottom: 10px !important;
+    padding-left: 5px;
+  }
+  #BrandLogo {
+    display: none;
+  }
+  /* Logo stuff */
+  #BrandLogo2 {
+    display: block;
+    height: 80%;
+    object-fit: contain;
+    /* border: 3px solid red; */
+    width: 100%;
+  }
+  #BrandLogo2 > img:hover {
+    cursor: pointer;
+  }
+
+  #BrandLogo2 > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* border: 3px solid blue; */
+  }
+
+  #BurgerMenu {
+    color: white;
+    background-color: #03dac6;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.3rem;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    top: 10%;
+    right: 3%;
+  }
+  .hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .show {
+    opacity: 1;
+  }
+
+  #SlideMenu {
+    /* border: 3px solid lime; */
+    border-width: 0px 10px 10px 10px;
+    border-style: solid;
+    border-color: #03dac6;
+    background-color: #121212;
+
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: -200%;
+    transition: top 0.6s ease-in-out;
+    z-index: 999;
+  }
+
+  .slide-menu-open {
+    top: 0 !important;
+  }
+
+  #Btns_Panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+  }
+  .welcomeTextNoAuth {
+    font-size: 60%;
+    text-align: end;
+    /* border: 2px solid red; */
+    height: 20%;
+    width: 80%;
+  }
+  .btnsDivNoAuth {
+    /* border: 2px solid blue; */
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* Styles for Navbar on medium-sized screens and above */
+@media (min-width: 768px) {
+  #BurgerMenu {
+    display: none;
+  }
+}
+/* _______________________________________________________ */

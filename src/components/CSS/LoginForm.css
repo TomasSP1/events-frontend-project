@@ -1,42 +1,133 @@
-@import url('https://fonts.googleapis.com/css2?family=Alkatra&display=swap');
+* {
+  box-sizing: border-box !important;
+}
+#main_containerLogin {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  background-color: #121212;
+  border: 10px solid #03dac6;
+  width: 100vw;
+  height: 100vh;
+  color: white !important;
+}
 
-.App {
-    background-color: white;
+.login-left {
+  display: none;
+}
+.login-right {
+  width: 100%;
+  height: 100%;
+  /* border: 2px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.RLform {
+  /* border: 2px solid orange !important; */
+  max-height: 80%;
+}
+
+#BrandLogoLogin {
+  width: 100%;
+  height: 20%;
+  /* border: 2px solid red; */
+  object-fit: contain;
+  padding: 1% !important;
+}
+#BrandLogoLogin > img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h3 {
+  color: #03dac6 !important;
+  font-family: "Titan One", cursive;
+  text-align: center;
+}
+
+.Auth-form {
+  width: 420px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.Auth-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+input {
+  font-family: "Inter", sans-serif;
+  font-weight: 500 !important;
+}
+
+/* login btn */
+#loginBtn {
+  background-color: #03dac6;
+  font-family: "Titan One", cursive !important;
+  color: black;
+  border: 2px solid transparent;
+  margin-bottom: 20px;
+}
+#loginBtn:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+  border: 2px solid #03dac6;
+}
+
+/* register btn */
+#registerBtn {
+  background-color: #bb86fc;
+  color: black;
+  width: 100%;
+  font-family: "Titan One", cursive !important;
+  border: 2px solid transparent;
+}
+#registerBtn:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+  border: 2px solid #bb86fc;
+}
+
+/* Close button */
+#titleCloseBtn > i {
+  background: transparent;
+  border: none;
+  color: #bb86fc;
+  cursor: pointer;
+  font-size: 2em;
+}
+#titleCloseBtn > i:hover {
+  color: red;
+}
+#titleCloseBtn {
+  width: 10px !important;
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  z-index: 100;
+}
+
+@media (min-width: 768px) {
+  .login-left {
+    display: block !important;
+    /* border: 3px solid green !important; */
+    width: 50% !important;
+    height: 100% !important;
   }
-  
-  .Auth-form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+  .login-right {
+    width: 50% !important;
   }
-  
-  .Auth-form {
-    width: 420px;
-    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    border-radius: 8px;
-    background-color: white;
-  }
-  
-  .Auth-form-content {
-    padding-left: 12%;
-    padding-right: 12%;
-  }
-  
-  .Auth-form-title {
-    text-align: center;
-    margin-bottom: 1em;
-    font-size: 24px;
-    color: rgb(34, 34, 34);
-    font-weight: 800;
-  }
-  
-  label {
-    font-size: 14px;
-    font-weight: 600;
-    color: rgb(34, 34, 34);
-  }
-  
+}

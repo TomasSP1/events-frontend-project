@@ -10,7 +10,18 @@ const LogoutBtn = () => {
     checkAuthStatus();
   };
 
-  return <div onClick={handleLogout}>Logout</div>;
+  return (
+    <div
+      title="Logout"
+      onClick={handleLogout}
+    >
+      <i
+        title="Logout"
+        onClick={handleLogout}
+        className="fa-solid fa-right-from-bracket"
+      ></i>
+    </div>
+  );
 };
 
 export default LogoutBtn;
