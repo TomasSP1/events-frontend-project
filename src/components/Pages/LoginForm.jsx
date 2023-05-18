@@ -27,11 +27,16 @@ function RLModal() {
       password: password,
     };
 
-    await authServices.login(user);
-    checkAuthStatus();
-    console.log(user);
-    navigate("/");
+    try {
+      await authServices.login(user);
+      checkAuthStatus();
+      console.log(user);
+      navigate("/");
+    } catch (error) {
+      alert("Login failed. Please check your credentials.");
+    }
   };
+
   return (
     <>
       <div

@@ -5,7 +5,6 @@ import { EventContext } from "./EventContext";
 
 const MyEvents = () => {
   const [, , , myEvents] = useContext(EventContext);
-  
 
   return (
     <Container fluid>

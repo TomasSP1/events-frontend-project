@@ -9,7 +9,7 @@ const EventRegForm = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const eventId = queryParams.get("eventId");
-  const [,,,,,refreshMyEvents] = useContext(EventContext);
+  const [, , , , , refreshMyEvents] = useContext(EventContext);
 
   const [categories, setCategories] = useState([]);
   const [title, setTitle] = useState("");

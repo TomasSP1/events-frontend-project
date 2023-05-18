@@ -210,17 +210,29 @@ const EventCard = (props) => {
               <div className="w-100">
                 <Button
                   variant="success"
-                  className="w-100 mb-2"
+                  className="p-1 mb-2"
                   onClick={handleApproveEvent}
+                  style={{
+                    position: "absolute",
+                    bottom: "1%",
+                    right: "25%",
+                    zIndex: "1",
+                  }}
                 >
-                  Patvirtinti
+                  Confirm
                 </Button>
                 <Button
                   variant="danger"
-                  className="w-100  mb-2"
+                  className="p-1 mb-2"
                   onClick={handleDeleteEvent}
+                  style={{
+                    position: "absolute",
+                    bottom: "1%",
+                    right: "1%",
+                    zIndex: "1",
+                  }}
                 >
-                  Ištrinti
+                  Decline
                 </Button>
               </div>
             ) : (
@@ -228,11 +240,18 @@ const EventCard = (props) => {
             )}
             {props.adminPage ? (
               <Button
-                variant="warning"
-                className="w-100  mb-2"
+                className="p-1 mb-2"
                 onClick={handleDissaproveEvent}
+                style={{
+                  position: "absolute",
+                  bottom: "0",
+                  right: "2%",
+                  zIndex: "1",
+                  backgroundColor: "#C41E3A",
+                  border: "none",
+                }}
               >
-                Nepatvirtinti
+                Delete
               </Button>
             ) : (
               ""
@@ -246,6 +265,7 @@ const EventCard = (props) => {
         showModal={showModal}
         handleCloseModal={handleCloseModal}
         modalDate={dateFormatted}
+        modalTitle={props.eventTitle}
         modalCategory={props.eventCategory}
         modalDescription={props.eventDescription}
         modalImage={props.eventImage}
