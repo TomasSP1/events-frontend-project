@@ -1,0 +1,243 @@
+* {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+.footer {
+  width: 100%;
+  background-color: #121212;
+  color: #fff;
+  border-top: 10px solid #03dac6;
+  display: flex;
+  position: relative;
+}
+
+/* Newsletter stuff */
+.footer_newsletter {
+  height: 100%;
+  width: 40%;
+  /* border: 2px solid green;
+  display: flex; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10%;
+}
+.footer_newsletter > p:nth-child(1) {
+  font-family: "Titan One", cursive;
+  font-size: 1.5em;
+  color: #03dac6;
+  text-align: center;
+  /* border: 2px solid green; */
+  margin-top: 50px !important;
+}
+.footer_newsletter > p:nth-child(2) {
+  font-size: 0.7rem;
+  font-family: "Inter", sans-serif;
+  padding: 0 25% !important;
+  /* border: 2px solid green; */
+  text-align: center;
+}
+
+.Newsletter_input {
+  /* border: 2px solid green; */
+  display: flex;
+  justify-content: center;
+}
+.Newsletter_input > input {
+  all: unset;
+  height: 1.5rem !important;
+  background-color: white;
+  color: black;
+  border-bottom-left-radius: 50px;
+  border-top-left-radius: 50px;
+  font-size: 0.8rem;
+  padding: 5px !important;
+  font-family: "Inter", sans-serif;
+  width: 15em !important;
+  height: 3em !important;
+}
+.Newsletter_input > button {
+  all: unset;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
+  font-size: 0.8rem;
+  padding: 2.5px !important;
+  background-color: #bb86fc;
+  font-family: "Inter", sans-serif;
+}
+/* ------------------------------------------ */
+
+/* Socials stuff */
+.footer_socials {
+  font-family: "Titan One", cursive;
+  color: #03dac6;
+  text-align: center;
+  /* border: 2px solid lime; */
+  margin-top: 10% !important;
+}
+.footer_socials > div > a {
+  color: white;
+  margin: 0 5% !important;
+  font-size: 2rem;
+}
+/* ------------------------------------------ */
+
+/* Links stuff */
+.footer_links {
+  width: 60%;
+  /* border: 5px solid blue; */
+  z-index: 10;
+}
+.footer_nav {
+  height: 40%;
+  width: 100%;
+  /* border: 2px solid green; */
+  padding-left: 5px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.footer_nav p:nth-child(1) {
+  font-family: "Titan One", cursive;
+  color: #03dac6;
+  font-size: 1.3rem;
+}
+.footer_nav a {
+  font-family: "Inter", sans-serif;
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+  margin-top: 3px 0 !important;
+}
+/* -------------------------------------------- */
+
+/* team */
+.footer_team {
+  height: 60%;
+  width: 100%;
+  /* border: 2px solid yellow; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.footer_team > p {
+  font-family: "Titan One", cursive;
+  color: #03dac6;
+  font-size: 1rem;
+  width: 100%;
+  padding-top: 20px !important;
+}
+.footer_team > div {
+  /* border: 2px solid red; */
+  margin: 0 5px !important;
+  display: flex;
+  justify-content: flex-start;
+
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.footer_team > div > a {
+  font-family: "Titan One", cursive;
+  color: #03dac6;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  /* border: 2px solid blue; */
+}
+
+.footer_team > div > p {
+  font-family: "Inter", sans-serif;
+  font-size: 0.7rem;
+  /* border: 2px solid orange; */
+  text-align: center;
+}
+/* ------------------------------------------ */
+
+/* decorations */
+.footer_drops {
+  height: 100%;
+  width: 40%;
+  /* border: 2px solid pink; */
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-right: 20px !important;
+}
+.footer_drops > div {
+  width: 50px;
+  height: 150px;
+  background-color: #03dac5;
+  margin: 0 10px !important;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  z-index: 0;
+}
+.footer_drops > div:nth-child(1) {
+  height: 50px;
+}
+.footer_drops > div:nth-child(2) {
+  height: 100px;
+}
+.footer_drops > div:nth-child(3) {
+  height: 150px;
+}
+/* ------------------------------------------ */
+
+.fa-linkedin {
+  margin: 0 3px 0 0 !important;
+}
+
+/* Font fixes for mobile devices */
+@media (max-width: 767px) {
+  /* .footer_drops {
+    display: none;
+  } */
+  .Newsletter_input > input {
+    font-size: 0.6rem;
+    width: 5em !important;
+    height: 2em !important;
+  }
+  .Newsletter_input > button {
+    font-size: 0.6rem;
+  }
+
+  .footer_socials {
+    font-size: 0.8rem;
+  }
+  .footer_socials > div > a {
+    font-size: 1.5rem;
+  }
+
+  .footer_newsletter > p:nth-child(1) {
+    font-size: 1em;
+  }
+  .footer_newsletter > p:nth-child(2) {
+    font-size: 0.5rem;
+    font-family: "Inter", sans-serif;
+  }
+
+  .footer_nav p:nth-child(1) {
+    font-size: 1rem;
+  }
+  .footer_nav a {
+    font-size: 0.5rem;
+  }
+
+  .footer_team > p {
+    font-size: 1rem;
+  }
+
+  .footer_team > div > a {
+    font-size: 0.6rem;
+  }
+
+  .footer_team > div > p {
+    font-size: 0.5rem;
+  }
+}
