@@ -5,12 +5,21 @@ export const EventContext = createContext([]);
 
 const EventProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
+  const [myEvents, setMyEvents] = useState([]);
 
   useEffect(() => {
     async function fetchEvents() {
       const eventsData = await eventServices.getEvents();
       setEvents(eventsData);
     }
+
+    async function fetchMyEvents() {
+      const userEventsData = await eventServices.getUserEvents();
+      setMyEvents(userEventsData);
+      console.log(myEvents)
+    }
+
+    fetchMyEvents();
     fetchEvents();
   }, []);
 
@@ -19,7 +28,19 @@ const EventProvider = ({ children }) => {
     setEvents(eventsData);
   };
 
-  const contextValue = [events, setEvents, refreshEvents]; // Include refreshEvents in the context value
+  const refreshMyEvents = async () => {
+    const userEventsData = await eventServices.getUserEvents();
+    setMyEvents(userEventsData);
+  };
+
+  const contextValue = [
+    events,
+    setEvents,
+    refreshEvents,
+    myEvents,
+    setMyEvents,
+    refreshMyEvents,
+  ];
 
   return (
     <EventContext.Provider value={contextValue}>
