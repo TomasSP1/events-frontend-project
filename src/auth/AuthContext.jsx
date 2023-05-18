@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const [userID, setUserID] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const checkAuthStatus = () => {
@@ -20,10 +21,12 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(true);
       setUserRole(userObj.role);
       setUserID(userObj);
+      setUserEmail(userObj.email);
     } else {
       setIsLoggedIn(false);
       setUserRole(null);
       setUserID(null);
+      setUserEmail(null);
     }
 
     setLoading(false);
@@ -38,7 +41,9 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userRole, userID, checkAuthStatus }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, userRole, userID, userEmail, checkAuthStatus }}
+    >
       {children}
     </AuthContext.Provider>
   );

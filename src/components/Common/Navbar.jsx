@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import "../CSS/Navbar.css";
 
 function Navigation() {
-  const { isLoggedIn, userRole } = useAuth();
+  const { isLoggedIn, userRole,userEmail } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
   const [showBurgerIcon, setShowBurgerIcon] = useState(true);
@@ -120,7 +120,7 @@ function Navigation() {
 
                 {/* welcome text */}
                 <div className="welcomeText">
-                  <p>Welcome, nesigavo idet username lol</p>
+                  <p>Welcome, {userEmail}</p>
                 </div>
               </div>
             </>

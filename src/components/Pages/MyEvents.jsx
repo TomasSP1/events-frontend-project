@@ -1,32 +1,19 @@
-import React, { useState, useEffect } from "react";
-import eventServices from "../../services/eventsServices";
+import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import UserEventCard from "./UserEventCard";
+import { EventContext } from "./EventContext";
 
 const MyEvents = () => {
-  const [myEvents, setMyEvents] = useState([]);
-
-  useEffect(() => {
-    const getMyEventsData = async () => {
-      const data = await eventServices.getUserEvents();
-
-      console.log(data);
-
-      if (data) {
-        setMyEvents(data);
-      }
-    };
-    getMyEventsData();
-  }, []);
-
-
- 
-  console.log(myEvents)
+  const [, , , myEvents] = useContext(EventContext);
+  
 
   return (
     <Container fluid>
       <Row>
-        <Col className="mt-5" md={10}>
+        <Col
+          className="mt-5"
+          md={10}
+        >
           <div className="card-row d-flex align-items-center flex-wrap">
             {myEvents.map((event) => (
               <UserEventCard
@@ -37,7 +24,6 @@ const MyEvents = () => {
                 eventDate={event.date}
                 eventDescription={event.description}
                 eventPlace={event.place}
-                eventUser={myEvents[0].user}
                 eventID={event._id}
               />
             ))}
