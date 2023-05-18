@@ -17,8 +17,17 @@ const Filter = (props) => {
     props.setFilter([filterProps[0], category]);
   };
   return (
-    <div>
-      <CategoriesFilter selectedCategory={categoryHandler} key={categories} />
+    <div
+      style={{
+        display: "flex",
+        gap: "10px",
+        width: "80%",
+      }}
+    >
+      <CategoriesFilter
+        selectedCategory={categoryHandler}
+        key={categories}
+      />
       <DateFilter selectedDate={dateHandler} />
     </div>
   );

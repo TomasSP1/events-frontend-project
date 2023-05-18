@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import LogoutBtn from "./LogoutBtn";
 import { useAuth } from "../../auth/AuthContext";
 
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import "../CSS/Navbar.css";
 
 function Navigation() {
-  const { isLoggedIn, userRole,userEmail } = useAuth();
+  const { isLoggedIn, userRole, userEmail } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
   const [showBurgerIcon, setShowBurgerIcon] = useState(true);

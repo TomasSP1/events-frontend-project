@@ -25,10 +25,12 @@
   align-items: center;
   flex-wrap: wrap;
 }
+#rightSideReg h3 {
+  margin-bottom: 10px !important;
+}
 
 #BrandLogoReg {
-  width: 100%;
-  height: 20%;
+  height: 20% !important;
   /* border: 2px solid red; */
   object-fit: contain;
   padding: 1% !important;
@@ -38,7 +40,12 @@
   width: 100%;
   height: 100%;
 }
-
+#rightSideReg h3 {
+  color: #03dac6 !important;
+  font-family: "Titan One", cursive;
+  text-align: center;
+  margin: 10px 0 !important;
+}
 /* .register-btn */
 .register-btn {
   background-color: #03dac6 !important;
@@ -69,7 +76,7 @@
   border: 2px solid #03dac6 !important;
 }
 
-label {
+#rightSideReg label {
   margin: -10px 0px !important;
   color: rgb(128, 128, 128);
 }
@@ -81,8 +88,16 @@ label {
 }
 
 #regForma {
-  height: auto;
-  /* border: 2px solid lime; */
+  /* 
+  border: 2px solid lime; */
+}
+
+#regForma input,
+button,
+a {
+  font-family: "Inter", sans-serif;
+  font-weight: 500 !important;
+  height: 40px !important;
 }
 
 @media (min-width: 768px) {

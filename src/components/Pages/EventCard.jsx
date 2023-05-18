@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { StarFill, Star } from "react-bootstrap-icons";
 import axios from "axios";
 import "../CSS/EventCard.css";
 import EventModal from "./EventModal";
@@ -14,13 +13,14 @@ import { EventContext } from "./EventContext";
 import favoritesServices from "../../services/favoritesServices";
 
 const EventCard = (props) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const [showModal, setShowModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [myFavorites, setMyFavorites] = useState([]);
   const navigate = useNavigate();
 
   const [eventData, setEventData] = useState(null);
-
 
   const [events, setEvents, refreshEvents] = useContext(EventContext);
 
@@ -132,7 +132,6 @@ const EventCard = (props) => {
     setIsFavorite(myFavorites.includes(props.eventID));
   }, [myFavorites, props.eventID]);
 
-
   useEffect(() => {
     const fetchEventData = async () => {
       try {
@@ -151,39 +150,61 @@ const EventCard = (props) => {
 
   return (
     <>
-     
-      <Card className="cardevents m-2 h-auto">
-      
-      <div className="image-container">
-    <button
-      className="bg-light favContainer"
-      onClick={() => handleFavorite(props.eventID)}
-    >
-      {isFavorite ? (
-        <StarFill className="favoriteIcon" />
-      ) : (
-        <Star className="favoriteIcon" />
-      )}
-    </button>
+      <div
+        id="singleEventCard"
+        className="cardevents m-2 h-auto"
+      >
+        {/* heart btn */}
+        <button
+          id="favContainer"
+          className="bg-light "
+          onClick={() => handleFavorite(props.eventID)}
+        >
+          {isFavorite ? (
+            <i
+              style={{ color: "#D22B2B", fontSize: "1.5rem" }}
+              id="favHeart"
+              className="fa-solid fa-heart"
+            ></i>
+          ) : (
+            <i
+              className="fa-solid fa-heart"
+              style={{
+                color: isHovered ? "#D22B2B" : "#000",
+                transform: isHovered ? "scale(1.2)" : "scale(1)",
+                transition: "transform 0.3s ease",
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            ></i>
+          )}
+        </button>
+        {/* ----------------- */}
+        {/* ----------------- */}
+        <div
+          onClick={handleShowModal}
+          className="image-container"
+        >
+          <img
+            src={props.eventImage}
+            alt=""
+            width="100%"
+            height="100%"
+          />
+        </div>
 
-    <h3 className="image-overlay">{eventData}</h3>
-    <Card.Img variant="top" src={props.eventImage} className="img-fluid" />
+        {/* ----------------- */}
 
-  </div>
+        {/* ----------------- */}
+        <div id="eventCardBody">
+          <h5> {props.eventTitle}</h5>
+          <p className="text-muted mb-2">{props.eventCategory}</p>
+          <p style={{ color: "#3700b3" }}>{dateFormatted}</p>
+          <p className="text-muted">{props.eventPlace}</p>
+          <p className="text-muted">
+            {eventData} <i class="fa-solid fa-heart"></i>
+          </p>
 
-        <Card.Body>
-          <Card.Title>{props.eventTitle}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            {props.eventCategory}
-          </Card.Subtitle>
-          <Card.Subtitle className="mb-2 text-muted">
-            {dateFormatted}
-          </Card.Subtitle>
-          <div className="d-flex justify-content-center">
-            <Button onClick={handleShowModal} className="mb-2 w-100">
-              Peržiurėti renginį
-            </Button>
-          </div>
           <div className="d-flex justify-content-center">
             {props.approved === false ? (
               <div className="w-100">
@@ -217,8 +238,9 @@ const EventCard = (props) => {
               ""
             )}
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+        {/* ----------------- */}
+      </div>
 
       <EventModal
         showModal={showModal}
