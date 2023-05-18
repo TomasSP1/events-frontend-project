@@ -16,7 +16,9 @@ import MyEvents from "./components/Pages/MyEvents";
 import { useAuth } from "./auth/AuthContext";
 import EventRegForm from "./components/Pages/EventRegForm";
 import Footer from "./components/Common/Footer";
+import About from "./components/Pages/About";
 import Favorites from "./components/Pages/Favorites";
+
 
 const Main = () => {
   const { isLoggedIn } = useAuth();
@@ -28,6 +30,11 @@ const Main = () => {
           path="/"
           element={<FrontPage />}
         />
+        <Route
+          path="/about"
+          element={<About />}
+        />
+
         <Route element={<ProtectedRoutes />}>
           <Route
             path="/login/*"

@@ -40,8 +40,8 @@ function Footer() {
       <div className="footer_links">
         <div className="footer_nav">
           <p>MyEvents</p>
-          <a href="#">Home</a>
-          <a href="#">About</a>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
         </div>
 
         <div className="footer_team">
