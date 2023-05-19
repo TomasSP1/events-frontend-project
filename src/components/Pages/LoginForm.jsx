@@ -30,11 +30,15 @@ function RLModal() {
       password: password,
     };
 
+    try {
     await authServices.login(user);
     checkAuthStatus();
     navigate("/");
+    }catch (error) {
+      alert("Login failed. Please check your credentials.");
+    }
   };
-  console.log("user from RLMODAL", email);
+
   return (
     <>
       <div

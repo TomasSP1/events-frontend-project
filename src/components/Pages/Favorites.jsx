@@ -49,7 +49,7 @@ const Favorites = () => {
           className="mt-5"
           md={10}
         >
-          <div className="card-row d-flex align-items-center flex-wrap">
+          <div className="card-row d-flex align-items-center flex-wrap m-5">
             {userFavoriteEvents.map((event) => (
               <EventCard
                 key={event._id}

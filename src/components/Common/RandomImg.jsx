@@ -1,11 +1,12 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import eventServices from "../../services/eventsServices";
+import "../CSS/RandomImg.css"; // Import CSS file for styling
 
-// component to get a random event image from the database
 const RandomImg = () => {
   const [events, setEvents] = useState([]);
+  const [randomNum, setRandomNum] = useState(0);
+  const [prevRandomNum, setPrevRandomNum] = useState(-1);
 
   const getEventsData = async () => {
     const data = await eventServices.getEvents();
@@ -16,22 +17,29 @@ const RandomImg = () => {
     getEventsData();
   }, []);
 
-  // get a random number between 0 and the length of the events array
-  let randomNum = Math.floor(Math.random() * events.length);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let newRandomNum = Math.floor(Math.random() * events.length);
+      while (newRandomNum === prevRandomNum) {
+        newRandomNum = Math.floor(Math.random() * events.length);
+      }
+      setPrevRandomNum(randomNum);
+      setRandomNum(newRandomNum);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [events, prevRandomNum, randomNum]);
 
   return (
-    <div
-      className="randomImg"
-      style={{
-        width: "100%",
-        height: "100%",
-        backgroundImage: `url(${events[randomNum]?.image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-
-        borderRadius: "inherit",
-      }}
-    />
+    <div className="randomImgContainer">
+      {events.length > 0 && (
+        <div
+          className="randomImg"
+          style={{
+            backgroundImage: `url(${events[randomNum]?.image})`,
+          }}
+        />
+      )}
+    </div>
   );
 };
 

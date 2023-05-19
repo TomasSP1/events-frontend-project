@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { StarFill, Star } from "react-bootstrap-icons";
+
 import axios from "axios";
 
 import EventModal from "./EventModal";
@@ -41,6 +41,9 @@ const UserEventCard = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [myFavorites, setMyFavorites] = useState([]);
   const navigate = useNavigate();
+
+  const [eventData, setEventData] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const [, , , , , refreshMyEvents] = useContext(EventContext);
 
@@ -119,58 +122,97 @@ const UserEventCard = (props) => {
 
   return (
     <>
-      <Card className="cardevents align-items-center m-2 h-auto">
+      <div
+        id="singleEventCard"
+        className="cardevents h-auto m-5"
+      >
+        {/* heart btn */}
         <button
-          className="bg-light favContainer"
+          id="favContainer"
+          className="bg-light "
           onClick={() => handleFavorite(props.eventID)}
         >
           {isFavorite ? (
-            <StarFill className="favoriteIcon" />
+            <i
+              style={{ color: "#D22B2B", fontSize: "1.5rem" }}
+              id="favHeart"
+              className="fa-solid fa-heart"
+            ></i>
           ) : (
-            <Star className="favoriteIcon" />
+            <i
+              className="fa-solid fa-heart"
+              style={{
+                color: isHovered ? "#D22B2B" : "#000",
+                transform: isHovered ? "scale(1.2)" : "scale(1)",
+                transition: "transform 0.3s ease",
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            ></i>
           )}
         </button>
-        <Card.Img
-          variant="top"
-          src={props.eventImage}
-        />
-        <Card.Body>
-          <Card.Title>{props.eventTitle}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            {props.eventCategory}
-          </Card.Subtitle>
-          <Card.Subtitle className="mb-2 text-muted">
-            {dateFormatted}
-          </Card.Subtitle>
-          <div className="d-flex justify-content-center">
-            <Button
-              onClick={handleShowModal}
-              className="mb-2 w-100"
-            >
-              Peržiurėti renginį
-            </Button>
-          </div>
-          <div className="d-flex justify-content-center">
-            <Button
-              onClick={() =>
-                navigate(`/add_event?eventId=${props.eventID}`, {
-                  state: { eventData: props },
-                })
-              }
-            >
-              Update
-            </Button>
-          </div>
-          <div className="d-flex justify-content-center my-2">
-            <Button
-              variant="danger"
-              onClick={handleDeleteEvent}
-            >
-              Ištrinti
-            </Button>
-          </div>
-        </Card.Body>
-      </Card>
+        {/* ----------------- */}
+        {/* ----------------- */}
+        <div
+          onClick={handleShowModal}
+          className="image-container"
+        >
+          <img
+            src={props.eventImage}
+            alt=""
+            width="100%"
+            height="100%"
+          />
+        </div>
+
+        {/* ----------------- */}
+
+        {/* ----------------- */}
+        <div id="eventCardBody">
+          <h5> {props.eventTitle}</h5>
+          <p className="text-muted mb-2">{props.eventCategory}</p>
+          <p style={{ color: "#3700b3" }}>{dateFormatted}</p>
+          <p className="text-muted">{props.eventPlace}</p>
+          <p className="text-muted">
+            {eventData} <i class="fa-solid fa-heart"></i>
+          </p>
+        </div>
+        {/* ----------------- */}
+
+        <div
+          className="d-flex justify-content-center"
+          style={{
+            position: "absolute",
+            bottom: "1%",
+            right: "1%",
+            zIndex: "1",
+          }}
+        >
+          <Button
+            onClick={() =>
+              navigate(`/add_event?eventId=${props.eventID}`, {
+                state: { eventData: props },
+              })
+            }
+          >
+            Update
+          </Button>
+        </div>
+        <div className="d-flex justify-content-center my-2">
+          <Button
+            variant="danger"
+            onClick={handleDeleteEvent}
+            style={{
+              position: "absolute",
+              bottom: "1%",
+              right: "25%",
+              zIndex: "1",
+            }}
+          >
+            Delete
+          </Button>
+        </div>
+      </div>
 
       <EventModal
         showModal={showModal}
