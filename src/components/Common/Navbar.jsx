@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import LogoutBtn from "./LogoutBtn";
+import { Link } from "react-router-dom";
+
 import { useAuth } from "../../auth/AuthContext";
 
-import { Link } from "react-router-dom";
+import LogoutBtn from "./LogoutBtn";
 
 import "../CSS/Navbar.css";
 
 function Navigation() {
-  const { isLoggedIn, userRole, userEmail } = useAuth();
+  const { isLoggedIn, userRole, userEmail, user } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
   const [showBurgerIcon, setShowBurgerIcon] = useState(true);
@@ -20,6 +21,8 @@ function Navigation() {
       setShowBurgerIcon(true);
     }, 500);
   };
+
+  console.log("userEmail", user);
 
   return (
     <>
@@ -91,36 +94,44 @@ function Navigation() {
                       <i className="fa-solid fa-toolbox"></i>
                     </Link>
                   )}
-
                   <Link
                     to="/add_event"
+                    title="Add event"
                     className="greenBtn"
                   >
                     <i className="fa-solid fa-plus"></i>
                   </Link>
                   <Link
                     to="/favorites"
+                    title="My favorites"
                     className="greenBtn"
                   >
                     <i className="fa-solid fa-heart"></i>
                   </Link>
-
                   <Link
                     to="/my_events"
+                    title="My events"
                     className="greenBtn"
                   >
                     <i className="fa-regular fa-user"></i>
                   </Link>
 
-                  <div className="greenBtn">
-                    <LogoutBtn></LogoutBtn>
+                  <div
+                    className="greenBtn"
+                    title="Log Out"
+                  >
+                    <LogoutBtn />
                   </div>
                 </div>
                 {/* green btns end here */}
 
                 {/* welcome text */}
                 <div className="welcomeText">
-                  <p>Welcome, {userEmail}</p>
+                  <p>
+                    Welcome,{" "}
+                    {userEmail.replace(/@.*$/, "").charAt(0).toUpperCase() +
+                      userEmail.slice(1).replace(/@.*$/, "")}
+                  </p>
                 </div>
               </div>
             </>

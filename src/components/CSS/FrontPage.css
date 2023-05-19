@@ -3,8 +3,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 #frontPageContainer {
-  /* border: 2px solid red; */
   border: none;
 }
 
@@ -19,8 +19,8 @@
   font-family: "Inter", sans-serif;
   font-weight: 600;
 }
+
 #filtersDiv {
-  /* border: 2px solid lime; */
   height: 15vh;
   display: flex;
   flex-wrap: wrap;
@@ -30,18 +30,16 @@
   padding-left: 80px !important;
 }
 
-#filtersDiv > h1 {
+#filtersDiv>h1 {
   font-family: "Titan One", cursive;
   font-size: 2rem;
   margin-bottom: 20px;
   margin-left: 7px !important;
-  /* border: 2px solid blue; */
   width: 100%;
   text-align: start !important;
 }
 
 #eventsDiv {
-  /* border: 5px solid blue; */
   min-height: 85vh;
 }
 

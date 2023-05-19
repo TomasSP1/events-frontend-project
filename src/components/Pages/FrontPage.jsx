@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
+
 import "../CSS/FrontPage.css";
-import EventCard from "./EventCard";
 import Filter from "../Filter/Filter";
 import filterLogic from "../Filter/FilterLogic";
 import { useAuth } from "../../auth/AuthContext";
+
+import EventCard from "./EventCard";
 import AdminPage from "./Admin/AdminPage";
 import { EventContext } from "./EventContext";
 
@@ -12,7 +14,6 @@ function FrontPage() {
   const [approvedEvents, setApprovedEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const { userRole } = useAuth();
-  console.log(useAuth());
 
   useEffect(() => {
     setApprovedEvents(events.filter((event) => event.approved));

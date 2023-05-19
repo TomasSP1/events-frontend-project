@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box !important;
 }
+
 #main_containerReg {
   position: absolute;
   z-index: 999;
@@ -12,40 +13,44 @@
   height: 100vh;
   color: white !important;
 }
+
 #leftSideReg {
   display: none;
 }
+
 #rightSideReg {
   width: 100%;
   height: 100%;
-  /* border: 2px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
+
 #rightSideReg h3 {
   margin-bottom: 10px !important;
 }
 
 #BrandLogoReg {
   height: 20% !important;
-  /* border: 2px solid red; */
   object-fit: contain;
   padding: 1% !important;
 }
-#BrandLogoReg > img {
+
+#BrandLogoReg>img {
   object-fit: contain;
   width: 100%;
   height: 100%;
 }
+
 #rightSideReg h3 {
   color: #03dac6 !important;
   font-family: "Titan One", cursive;
   text-align: center;
   margin: 10px 0 !important;
 }
+
 /* .register-btn */
 .register-btn {
   background-color: #03dac6 !important;
@@ -53,6 +58,7 @@
   color: black;
   border: 2px solid transparent !important;
 }
+
 .register-btn:hover {
   background-color: rgba(255, 255, 255, 0) !important;
   color: white;
@@ -68,6 +74,7 @@
   color: black;
   border: 2px solid transparent !important;
 }
+
 .login-instead-btn:hover {
   background-color: rgba(255, 255, 255, 0) !important;
   color: white;
@@ -87,10 +94,7 @@
   width: 300px !important;
 }
 
-#regForma {
-  /* 
-  border: 2px solid lime; */
-}
+#regForma {}
 
 #regForma input,
 button,
@@ -105,8 +109,8 @@ a {
     display: block !important;
     width: 50% !important;
     height: 100% !important;
-    /* border: 2px solid yellow !important; */
   }
+
   #rightSideReg {
     width: 50% !important;
   }

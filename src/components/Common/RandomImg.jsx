@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import eventServices from "../../services/eventsServices";
 import "../CSS/RandomImg.css"; // Import CSS file for styling
 

@@ -15,6 +15,7 @@ const EventModal = (props) => {
         id="modalCloseBtn"
       >
         {props.eventTitle}
+
       </Modal.Header>
 
       <div id="modalPic">

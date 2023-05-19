@@ -8,9 +8,9 @@
   width: 150px;
   font-family: "Inter", sans-serif;
 }
-#CatsContainer {
-  /* border: 3px solid blue !important; */
-}
+
+#CatsContainer {}
+
 #CatsContainer select {
   width: 100%;
   padding: 5px 10px !important;

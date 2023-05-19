@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+
 import favoriteServices from "../../services/favoritesServices";
 import eventServices from "../../services/eventsServices";
-import { Col, Container, Row } from "react-bootstrap";
+
 import EventCard from "./EventCard";
 
 const Favorites = () => {

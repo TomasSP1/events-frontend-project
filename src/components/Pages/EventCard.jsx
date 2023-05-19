@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 import "../CSS/EventCard.css";
+
 import EventModal from "./EventModal";
 import {
   approveEvent,
@@ -10,19 +12,17 @@ import {
   deleteEvent,
 } from "./Admin/AdminControlEvents";
 import { EventContext } from "./EventContext";
-import favoritesServices from "../../services/favoritesServices";
 
 const EventCard = (props) => {
   const [isHovered, setIsHovered] = useState(false);
-
   const [showModal, setShowModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [myFavorites, setMyFavorites] = useState([]);
-  const navigate = useNavigate();
-
   const [eventData, setEventData] = useState(null);
 
-  const [events, setEvents, refreshEvents] = useContext(EventContext);
+  const navigate = useNavigate();
+
+  const [refreshEvents] = useContext(EventContext);
 
   const date = new Date(props.eventDate);
   const year = date.getFullYear();
@@ -50,8 +50,6 @@ const EventCard = (props) => {
   };
 
   const handleFavorite = async (id) => {
-    console.log("id", id, isFavorite);
-
     const userStr = localStorage.getItem("user");
     const userObj = JSON.parse(userStr);
 
@@ -74,8 +72,6 @@ const EventCard = (props) => {
             }
           );
           setIsFavorite(true);
-          console.log("myFavorites", myFavorites);
-          console.log("Added event to favorites:", response);
         } else {
           // Remove the event from the user's favorites
           const response = await axios.delete(
@@ -88,9 +84,6 @@ const EventCard = (props) => {
             }
           );
           setIsFavorite(false);
-
-          console.log("myFavoritesdelete", myFavorites);
-          console.log("Removed event from favorites:", response);
         }
       } catch (error) {
         console.error(error);
@@ -202,7 +195,7 @@ const EventCard = (props) => {
           <p style={{ color: "#3700b3" }}>{dateFormatted}</p>
           <p className="text-muted">{props.eventPlace}</p>
           <p className="text-muted">
-            {eventData} <i class="fa-solid fa-heart"></i>
+            {eventData} <i className="fa-solid fa-heart"></i>
           </p>
 
           <div className="d-flex justify-content-center">

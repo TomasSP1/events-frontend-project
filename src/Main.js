@@ -1,16 +1,16 @@
 import React from "react";
-import LoginForm from "./components/Pages/LoginForm";
-import "bootstrap/dist/css/bootstrap.css";
-import FrontPage from "./components/Pages/FrontPage";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
+
+import LoginForm from "./components/Pages/LoginForm";
+import FrontPage from "./components/Pages/FrontPage";
 import Navigation from "./components/Common/Navbar";
 import RegisterForm from "./components/Pages/RegisterForm";
-import "./components/CSS/App.css";
 import ProtectedRoutes from "./auth/ProtectedRoutes";
 import MyEvents from "./components/Pages/MyEvents";
 import { useAuth } from "./auth/AuthContext";
@@ -18,10 +18,11 @@ import EventRegForm from "./components/Pages/EventRegForm";
 import Footer from "./components/Common/Footer";
 import About from "./components/Pages/About";
 import Favorites from "./components/Pages/Favorites";
-
+import "./components/CSS/App.css";
 
 const Main = () => {
   const { isLoggedIn } = useAuth();
+
   return (
     <Router className="home">
       <Navigation />
@@ -34,7 +35,6 @@ const Main = () => {
           path="/about"
           element={<About />}
         />
-
         <Route element={<ProtectedRoutes />}>
           <Route
             path="/login/*"
