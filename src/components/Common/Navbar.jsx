@@ -129,8 +129,10 @@ function Navigation() {
                 <div className="welcomeText">
                   <p>
                     Welcome,{" "}
-                    {userEmail.replace(/@.*$/, "").charAt(0).toUpperCase() +
-                      userEmail.slice(1).replace(/@.*$/, "")}
+                    {userEmail
+                      ? userEmail.replace(/@.*$/, "").charAt(0).toUpperCase() +
+                        userEmail.slice(1).replace(/@.*$/, "")
+                      : " Guest"}
                   </p>
                 </div>
               </div>
