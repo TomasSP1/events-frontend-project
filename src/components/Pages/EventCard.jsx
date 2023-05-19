@@ -22,7 +22,7 @@ const EventCard = (props) => {
 
   const navigate = useNavigate();
 
-  const [refreshEvents] = useContext(EventContext);
+  const [,,refreshEvents] = useContext(EventContext);
 
   const date = new Date(props.eventDate);
   const year = date.getFullYear();

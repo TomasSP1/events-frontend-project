@@ -10,7 +10,7 @@ import AdminPage from "./Admin/AdminPage";
 import { EventContext } from "./EventContext";
 
 function FrontPage() {
-  const [events, setEvents] = useContext(EventContext);
+  const [events] = useContext(EventContext);
   const [approvedEvents, setApprovedEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const { userRole } = useAuth();

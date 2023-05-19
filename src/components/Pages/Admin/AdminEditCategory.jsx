@@ -48,13 +48,13 @@ const AdminEditCategory = () => {
           lg="6"
           className="text-center"
         >
-          <h1>Sukurti/Ištrinti Kategorija</h1>
+          <h1>Create/Delete category</h1>
           <Form onSubmit={onSubmit}>
             <Form.Group className="mb-3">
               <Form.Label></Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ivesti kategorija"
+                placeholder="Enter category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 style={{ textTransform: "capitalize" }}
@@ -64,7 +64,7 @@ const AdminEditCategory = () => {
               variant="secondary"
               type="submit"
             >
-              Pridėti arba ištrinti
+              Create or Delete
             </Button>
           </Form>
         </Col>
