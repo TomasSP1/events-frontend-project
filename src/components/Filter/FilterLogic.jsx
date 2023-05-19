@@ -20,7 +20,6 @@ const filterLogic = (selected, events, setFilteredEvents) => {
     targetCategory = selected[1];
   }
 
-  console.log(selected);
   setFilteredEvents(
     events.filter((event) => {
       if (targetDate === "savaitgali") {

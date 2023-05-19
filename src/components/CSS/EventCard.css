@@ -3,7 +3,6 @@ h5 {
 }
 
 #singleEventCard {
-  /* border: 3px solid red; */
   height: 350px !important;
   width: 300px !important;
   position: relative;
@@ -11,11 +10,9 @@ h5 {
     inset 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
-/* image container */
 .image-container {
   position: relative;
   height: 60%;
-  /* border: 3px solid lime; */
   overflow: hidden;
 }
 
@@ -81,9 +78,11 @@ h5 {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
@@ -109,25 +108,11 @@ h5 {
 }
 
 #eventCardBody {
-  /* border: 3px solid blue; */
   font-family: "inter", sans-serif;
   height: 40%;
   padding: 5px 20px 0 20px !important;
 }
-#eventCardBody > h5 {
+
+#eventCardBody>h5 {
   font-weight: 800;
-
-  /* border: 3px solid red; */
 }
-
-/* @media (min-width: 768px) {
-  #singleEventCard {
-    width: 20% !important;
-  }
-}
-
-@media (min-width: 800px) {
-  #singleEventCard {
-    width: 30% !important;
-  }
-} */

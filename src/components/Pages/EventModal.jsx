@@ -3,7 +3,10 @@ import { Modal } from "react-bootstrap";
 
 const EventModal = (props) => {
   return (
-    <Modal show={props.showModal} onHide={props.handleCloseModal}>
+    <Modal
+      show={props.showModal}
+      onHide={props.handleCloseModal}
+    >
       <Modal.Header closeButton>
         <Modal.Title>{props.eventTitle}</Modal.Title>
       </Modal.Header>

@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box !important;
 }
+
 #main_containerLogin {
   position: absolute;
   z-index: 999;
@@ -16,20 +17,21 @@
 .login-left {
   display: none;
 }
+
 .login-right {
   width: 100%;
   height: 100%;
-  /* border: 2px solid blue; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .RLform {
-  /* border: 2px solid orange !important; */
   max-height: 80%;
   padding: 50px !important;
 }
+
 .RLform input,
 button {
   font-family: "Inter", sans-serif;
@@ -40,11 +42,11 @@ button {
 #BrandLogoLogin {
   width: 100%;
   height: 20% !important;
-  /* border: 2px solid red; */
   object-fit: contain;
   padding: 1% !important;
 }
-#BrandLogoLogin > img {
+
+#BrandLogoLogin>img {
   object-fit: contain;
   width: 100%;
   height: 100%;
@@ -55,6 +57,7 @@ button {
   justify-content: center;
   align-items: center;
 }
+
 #main_containerLogin h3 {
   color: #03dac6 !important;
   font-family: "Titan One", cursive;
@@ -72,6 +75,7 @@ button {
   padding-left: 12%;
   padding-right: 12%;
 }
+
 /* login btn */
 #loginBtn {
   background-color: #03dac6;
@@ -80,6 +84,7 @@ button {
   border: 2px solid transparent;
   margin-bottom: 20px;
 }
+
 #loginBtn:hover {
   background-color: rgba(255, 255, 255, 0);
   color: white;
@@ -96,6 +101,7 @@ button {
   font-family: "Titan One", cursive !important;
   border: 2px solid transparent;
 }
+
 #registerBtn:hover {
   background-color: rgba(255, 255, 255, 0);
   color: white;
@@ -105,16 +111,18 @@ button {
 }
 
 /* Close button */
-#titleCloseBtn > i {
+#titleCloseBtn>i {
   background: transparent;
   border: none;
   color: #bb86fc;
   cursor: pointer;
   font-size: 2em;
 }
-#titleCloseBtn > i:hover {
+
+#titleCloseBtn>i:hover {
   color: red;
 }
+
 #titleCloseBtn {
   width: 10px !important;
   position: absolute;
@@ -126,10 +134,10 @@ button {
 @media (min-width: 768px) {
   .login-left {
     display: block !important;
-    /* border: 3px solid green !important; */
     width: 50% !important;
     height: 100% !important;
   }
+
   .login-right {
     width: 50% !important;
   }

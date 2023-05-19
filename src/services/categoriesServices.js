@@ -1,9 +1,12 @@
 import axios from "axios";
+
 const API_URL = "/api/categories/";
 
 const userStr = localStorage.getItem("user");
 const userObj = JSON.parse(userStr);
 const token = userObj ? userObj.token : null;
+
+//========================= GET CATEGORIES =======================//
 
 const getCategories = async () => {
   try {
@@ -13,6 +16,8 @@ const getCategories = async () => {
     console.error(error);
   }
 };
+
+//========================= SET CATEGORIES =======================//
 
 const postCategory = async (category) => {
   try {
@@ -26,6 +31,8 @@ const postCategory = async (category) => {
     console.error(error);
   }
 };
+
+//========================= DELETE CATEGORIES =======================//
 
 const deleteCategory = async (categoryID) => {
   try {
@@ -43,7 +50,7 @@ const deleteCategory = async (categoryID) => {
 const categoriesServices = {
   getCategories,
   postCategory,
-  deleteCategory
+  deleteCategory,
 };
 
 export default categoriesServices;

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+
 import categoriesServices from "../../services/categoriesServices";
 import "../CSS/CategoriesFilter.css";
 
 function CategoriesFilter(props) {
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const selectedCategoryHandler = (e) => {
     props.selectedCategory(e.target.value.toLowerCase());
@@ -16,7 +17,7 @@ function CategoriesFilter(props) {
 
       if (data) {
         setCategories(data);
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -25,7 +26,7 @@ function CategoriesFilter(props) {
 
   return (
     <div>
-      {loading ? (
+      {isLoading ? (
         <div id="loadingDiv">Loading...</div>
       ) : (
         <div id="catsParent">
@@ -39,13 +40,12 @@ function CategoriesFilter(props) {
                 Visi&nbsp;&nbsp;&#9662;
               </option>
 
-              {categories.map((category) => (
+              {categories.map(({ _id, title }) => (
                 <option
-                  key={category._id}
-                  value={category.title}
+                  key={_id}
+                  value={title}
                 >
-                  {category.title.charAt(0).toUpperCase() +
-                    category.title.slice(1)}
+                  {title.charAt(0).toUpperCase() + title.slice(1)}
                 </option>
               ))}
             </select>

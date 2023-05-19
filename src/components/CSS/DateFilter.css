@@ -5,11 +5,11 @@
 }
 
 #dateContainer {
-  /* border: 3px solid blue !important; */
   width: 150px;
   font-family: "Inter", sans-serif;
 }
-#dateContainer > select {
+
+#dateContainer>select {
   width: 100%;
   padding: 5px 10px !important;
   border-radius: 20px;
@@ -19,7 +19,7 @@
   transition: 0.3s;
 }
 
-#dateContainer > select:hover {
+#dateContainer>select:hover {
   cursor: pointer;
   border: 3px solid #bb86fc;
   scale: 1.1;

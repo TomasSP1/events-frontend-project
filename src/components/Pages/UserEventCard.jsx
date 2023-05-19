@@ -3,8 +3,10 @@ import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { StarFill, Star } from "react-bootstrap-icons";
 import axios from "axios";
+
 import EventModal from "./EventModal";
 import { EventContext } from "./EventContext";
+
 import favoritesServices from "../../services/favoritesServices";
 
 const deleteEvent = async (eventId) => {
@@ -29,8 +31,6 @@ const deleteEvent = async (eventId) => {
         },
       }
     );
-
-    console.log("Deleted event:", response);
   } catch (error) {
     console.error(error);
   }
@@ -41,8 +41,6 @@ const UserEventCard = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [myFavorites, setMyFavorites] = useState([]);
   const navigate = useNavigate();
-
-  console.log(props);
 
   const [, , , , , refreshMyEvents] = useContext(EventContext);
 
@@ -61,8 +59,6 @@ const UserEventCard = (props) => {
   };
 
   const handleFavorite = async (id) => {
-    console.log("id", id, isFavorite);
-
     const userStr = localStorage.getItem("user");
     const userObj = JSON.parse(userStr);
 
@@ -85,8 +81,6 @@ const UserEventCard = (props) => {
             }
           );
           setIsFavorite(true);
-          console.log("myFavorites", myFavorites);
-          console.log("Added event to favorites:", response);
         } else {
           // Remove the event from the user's favorites
           const response = await axios.delete(
@@ -99,9 +93,6 @@ const UserEventCard = (props) => {
             }
           );
           setIsFavorite(false);
-
-          console.log("myFavoritesdelete", myFavorites);
-          console.log("Removed event from favorites:", response);
         }
       } catch (error) {
         console.error(error);

@@ -1,5 +1,5 @@
-import Main from "./Main";
 import { AuthProvider } from "./auth/AuthContext";
+import Main from "./Main";
 import EventProvider from "./components/Pages/EventContext";
 import CategoriesProvider from "./components/Pages/CategoriesContext";
 

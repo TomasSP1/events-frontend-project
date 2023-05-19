@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+
 import eventServices from "../../services/eventsServices";
 
 // component to get a random event image from the database

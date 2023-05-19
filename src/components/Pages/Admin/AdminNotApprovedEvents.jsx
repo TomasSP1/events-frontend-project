@@ -1,9 +1,10 @@
 import React from "react";
+
 import EventCard from "../EventCard";
 
 const AdminNotApprovedEvents = (props) => {
-  
   const notApprovedEvents = props.events.filter((event) => !event.approved);
+
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Not Approved Events</h1>

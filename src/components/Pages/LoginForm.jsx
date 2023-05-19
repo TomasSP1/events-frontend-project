@@ -1,14 +1,17 @@
-import "../CSS/LoginForm.css";
-import { NavLink, Link, Route, Routes, useNavigate } from "react-router-dom";
-import RegisterForm from "./RegisterForm";
 import React, { useState } from "react";
+import { NavLink, Link, Route, Routes, useNavigate } from "react-router-dom";
+
+import RegisterForm from "./RegisterForm";
+
 import authServices from "../../auth/authServices";
 import { useAuth } from "../../auth/AuthContext";
 import RandomImg from "../Common/RandomImg";
+import "../CSS/LoginForm.css";
 
 function RLModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
   const { checkAuthStatus } = useAuth();
 
@@ -29,9 +32,9 @@ function RLModal() {
 
     await authServices.login(user);
     checkAuthStatus();
-    console.log(user);
     navigate("/");
   };
+  console.log("user from RLMODAL", email);
   return (
     <>
       <div

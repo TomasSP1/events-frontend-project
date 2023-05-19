@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+
 import eventServices from "../../services/eventsServices";
 
 export const EventContext = createContext([]);
@@ -16,7 +17,6 @@ const EventProvider = ({ children }) => {
     async function fetchMyEvents() {
       const userEventsData = await eventServices.getUserEvents();
       setMyEvents(userEventsData);
-      console.log(myEvents)
     }
 
     fetchMyEvents();
